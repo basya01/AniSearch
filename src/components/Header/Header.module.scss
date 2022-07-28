@@ -1,0 +1,72 @@
+@import '../../styles/variables.scss';
+
+.header {
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0px -5px 19px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  padding: 24px 0;
+  font: 400 29px 'Montserrat Alternates', sans-serif;
+  span {
+    font-weight: 600;
+    color: $main-color;
+  }
+}
+
+.nav {
+  display: flex;
+  margin-left: 156px;
+  font-size: 22px;
+  font-weight: 600;
+  &Item {
+    position: relative;
+  }
+
+  a {
+    transition: color .2s;
+    margin-right: 47px;
+    
+    &:hover {
+      color: $main-color;
+      cursor: pointer;
+    }
+  }
+
+  .active {
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: calc(100% - 47px);
+      height: 3px;
+      background: $main-color;
+      top: 52px;
+    }
+    color: $main-color;
+  }
+}
+
+.search {
+  margin-left: auto;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 50%;
+    transform: translate(14px, -50%);
+  }
+
+  &Input {
+    font-size: 16px;
+    outline: none;
+    border: none;
+    background: #F8F8F8;
+    border-radius: 27px;
+    padding: 12px 7px 12px 49px;
+    width: 329px;
+  }
+}

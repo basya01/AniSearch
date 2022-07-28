@@ -1,0 +1,27 @@
+@import './variables.scss';
+
+html {
+  color: #484848;
+  background: $bg-bright;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0 auto;
+  width: $container-width;
+  
+  &__content {
+    margin: 0 auto;
+    width: $content-width;
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+  &__anime-list {
+    padding-top: 83px;
+    z-index: 0;
+  }
+}

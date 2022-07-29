@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FilterIcon from '../../assets/filter-icon.svg';
 import AnimeItem from '../../components/AnimeItem';
+import AnimeSkeleton from '../../components/AnimeItem/AnimeSkeleton';
 import Filters from '../../components/Filters';
 import { Anime, fetchAnimes } from '../../redux/slices/animes';
 import { FilterState } from '../../redux/slices/filters';
@@ -30,7 +31,7 @@ interface Item {
 const AnimeList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const items = useSelector<RootState, Anime[]>((state) => state.animes.items);
+  const animes = useSelector((state: RootState) => state.animes);
   const [filtersOpen, setFilterOpen] = useState(false);
 
   const { genres, sort, status, duration, kind, search } = useSelector<RootState, FilterState>(
@@ -49,22 +50,29 @@ const AnimeList = () => {
 
     const paramsUrl =
       '?' +
-      qs.stringify({
-        genres: genres.join(',') || null,
-        sort: sort || null,
-        status: status || null,
-        duration: duration || null,
-        kind: kind || null,
-        search: search || null,
-      }, { skipNulls: true });
-    
+      qs.stringify(
+        {
+          genres: genres.join(',') || null,
+          sort: sort || null,
+          status: status || null,
+          duration: duration || null,
+          kind: kind || null,
+          search: search || null,
+        },
+        { skipNulls: true },
+      );
+
     navigate(paramsUrl);
     dispatch(fetchAnimes(queryParams));
   }, [genres, sort, status, duration, kind, search]);
 
   useEffect(() => {
     window.location.pathname === '/' ? dispatch(setPage(0)) : dispatch(setPage(1));
-  }, [])
+  }, []);
+
+  const animeItems = animes.items.map((item) => <AnimeItem key={item.id} {...item} />);
+
+  const skeletons = [...new Array(8)].map((_) => <AnimeSkeleton />);
 
   return (
     <section>
@@ -79,11 +87,7 @@ const AnimeList = () => {
               className={styles.filters}
             />
           </div>
-          <div className={styles.items}>
-            {items.map((item) => (
-              <AnimeItem key={item.id} {...item} />
-            ))}
-          </div>
+          <div className={styles.items}>{animes.status === 'pending' ? skeletons : animeItems}</div>
         </div>
       </div>
     </section>

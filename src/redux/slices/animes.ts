@@ -17,7 +17,7 @@ export interface Anime {
   url: string;
 }
 
-enum Status {
+export enum Status {
   PENDING = 'pending',
   SUCCESS = 'success',
   ERROR = 'error',

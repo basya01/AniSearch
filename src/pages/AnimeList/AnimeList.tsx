@@ -8,6 +8,7 @@ import AnimeItem from '../../components/AnimeItem';
 import Filters from '../../components/Filters';
 import { Anime, fetchAnimes } from '../../redux/slices/animes';
 import { FilterState } from '../../redux/slices/filters';
+import { setPage } from '../../redux/slices/page';
 import { AppDispatch, RootState } from '../../redux/store';
 import styles from './AnimeList.module.scss';
 
@@ -61,10 +62,14 @@ const AnimeList = () => {
     dispatch(fetchAnimes(queryParams));
   }, [genres, sort, status, duration, kind, search]);
 
+  useEffect(() => {
+    window.location.pathname === '/' ? dispatch(setPage(0)) : dispatch(setPage(1));
+  }, [])
+
   return (
     <section>
       <Filters isOpen={filtersOpen} setIsOpen={setFilterOpen} />
-      <div className="container container__anime-list">
+      <div className="container container__page">
         <div className={`container__content ${styles.position}`}>
           <div className={styles.wrapper}>
             <img

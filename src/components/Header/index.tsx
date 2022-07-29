@@ -1,13 +1,15 @@
-import React, { FC } from 'react';
-import { useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
-
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Link, Outlet } from 'react-router-dom';
+import { setPage } from '../../redux/slices/page';
+import { AppDispatch, RootState } from '../../redux/store';
 import styles from './Header.module.scss';
 import Search from './Search';
 
 const Header: FC = () => {
-  const { pathname } = useLocation();
-  const [activePage, setActivePage] = useState(pathname === '/' ? 0 : 1);
+  const dispatch = useDispatch<AppDispatch>();
+  const { page } = useSelector((state: RootState) => state.page);
 
   const NavItemsData = [
     { id: 0, value: 'Список аниме', link: '/' },
@@ -15,7 +17,7 @@ const Header: FC = () => {
   ];
 
   const pageHandler = (id: number) => {
-    setActivePage(id);
+    dispatch(setPage(id));
   };
 
   const NavItems = NavItemsData.map((item) => (
@@ -23,7 +25,7 @@ const Header: FC = () => {
       <Link
         to={item.link}
         onClick={() => pageHandler(item.id)}
-        className={activePage === item.id ? styles.active : ''}>
+        className={page === item.id ? styles.active : ''}>
         {item.value}
       </Link>
     </div>

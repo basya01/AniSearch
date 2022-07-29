@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import qs, { ParsedQs } from 'qs';
 
 export interface FilterState {
   genres: number[];
@@ -10,13 +11,25 @@ export interface FilterState {
   search: string;
 }
 
+interface ParamsUrl {
+  genres?: string;
+  sort?: string;
+  status?: string;
+  duration?: string;
+  kind?: string;
+  search?: string;
+}
+
+const { genres, sort, status, duration, kind, search }: ParamsUrl = qs.parse(
+  window.location.search.substring(1),
+);
 const initialState: FilterState = {
-  genres: [],
-  sort: 'ranked',
-  status: '',
-  duration: '',
-  kind: '',
-  search: '',
+  genres: genres?.split(',').map((filter: string) => +filter) || [],
+  sort: sort || 'ranked',
+  status: status || '',
+  duration: duration || '',
+  kind: kind || '',
+  search: search || '',
 };
 
 export const filtersSlice = createSlice({

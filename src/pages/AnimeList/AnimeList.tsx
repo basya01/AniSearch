@@ -1,3 +1,4 @@
+import qs from 'qs';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -29,7 +30,6 @@ const AnimeList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const items = useSelector<RootState, Anime[]>((state) => state.animes.items);
-  console.log(items);
   const [filtersOpen, setFilterOpen] = useState(false);
 
   const { genres, sort, status, duration, kind, search } = useSelector<RootState, FilterState>(
@@ -37,7 +37,7 @@ const AnimeList = () => {
   );
 
   useEffect(() => {
-    const params = {
+    const queryParams = {
       genre: 'genre=' + genres.join(','),
       sort: 'order=' + sort,
       status: 'status=' + status,
@@ -46,7 +46,19 @@ const AnimeList = () => {
       search: 'search=' + search,
     };
 
-    dispatch(fetchAnimes(params));
+    const paramsUrl =
+      '?' +
+      qs.stringify({
+        genres: genres.join(',') || null,
+        sort: sort || null,
+        status: status || null,
+        duration: duration || null,
+        kind: kind || null,
+        search: search || null,
+      }, { skipNulls: true });
+    
+    navigate(paramsUrl);
+    dispatch(fetchAnimes(queryParams));
   }, [genres, sort, status, duration, kind, search]);
 
   return (

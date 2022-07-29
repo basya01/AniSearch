@@ -22,8 +22,6 @@ const Search = () => {
     setSearchDebounce(event.target.value);
   };
 
-  console.log(searchGlobal);
-
   return (
     <div className={styles.search}>
       <img src={SearchSVG} alt="" />

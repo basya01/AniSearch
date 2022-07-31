@@ -9,6 +9,7 @@ export interface FilterState {
   duration: string;
   kind: string;
   search: string;
+  page: number;
 }
 
 interface ParamsUrl {
@@ -30,6 +31,7 @@ const initialState: FilterState = {
   duration: duration || '',
   kind: kind || '',
   search: search || '',
+  page: 1,
 };
 
 export const filtersSlice = createSlice({
@@ -55,10 +57,13 @@ export const filtersSlice = createSlice({
     setSearch: (state, action: PayloadAction<string>) => {
       state.search = state.search === action.payload ? '' : action.payload;
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { setGenres, setSort, setStatus, setDuration, setKind, setSearch } =
+export const { setGenres, setSort, setStatus, setDuration, setKind, setSearch, setPage } =
   filtersSlice.actions;
 
 export default filtersSlice.reducer;

@@ -9,8 +9,8 @@ import debounce from 'lodash.debounce';
 
 const Search = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [searchLocal, setSearchLocal] = useState('');
   const searchGlobal = useSelector<RootState, string>((state) => state.filters.search);
+  const [searchLocal, setSearchLocal] = useState(searchGlobal || '');
 
   const setSearchDebounce = useCallback(
     debounce((value) => dispatch(setSearch(value)), 500),
@@ -21,8 +21,6 @@ const Search = () => {
     setSearchLocal(event.target.value);
     setSearchDebounce(event.target.value);
   };
-
-  console.log(searchGlobal);
 
   return (
     <div className={styles.search}>

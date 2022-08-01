@@ -7,12 +7,13 @@ import FilterIcon from '../../assets/filter-icon.svg';
 import AnimeItem, { AnimeItemProps } from '../../components/AnimeItem';
 import AnimeSkeleton from '../../components/AnimeItem/AnimeSkeleton';
 import Filters from '../../components/Filters';
-import { Anime, clearAnimes, fetchAnimes } from '../../redux/slices/animes';
+import { Anime, clearAnimes, fetchAnimes, Status } from '../../redux/slices/animes';
 import { FilterState, setPage } from '../../redux/slices/filters';
 import { setActivePage } from '../../redux/slices/page';
 import { AppDispatch, RootState } from '../../redux/store';
 import styles from './AnimeList.module.scss';
 import debounce from 'lodash.debounce';
+import NotFoundAnimes from '../../components/NotFoundAnimes';
 
 const AnimeList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -75,27 +76,52 @@ const AnimeList = () => {
     window.location.pathname === '/' ? dispatch(setActivePage(0)) : dispatch(setActivePage(1));
   }, []);
 
+
   const observerLoader = useRef<IntersectionObserver | null>();
-
-
-  const actionInSight = (entries: IntersectionObserverEntry[]) => {
-    if (entries[0].isIntersecting) {
-      // setPageDebounce();
-      dispatch(setPage(page + 1));
-    }
-  };
-  //регистрируем на последний элемент наблюдателя, когда последний элемент меняется
   useEffect(() => {
-    if (animes.status !== 'success') return;
     if (observerLoader.current) {
       observerLoader.current.disconnect();
     }
 
-    observerLoader.current = new IntersectionObserver(actionInSight);
+    observerLoader.current = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+      if (animes.status !== Status.SUCCESS) return;
+      if (entries[0].isIntersecting) {
+        dispatch(setPage(page + 1));
+      }
+    });
     if (lastItem.current) {
       observerLoader.current.observe(lastItem.current);
     }
+    return () => {
+      if (observerLoader.current) {
+        observerLoader.current.disconnect();
+      }
+    };
   }, [lastItem]);
+
+  // const observer = useRef();
+  // useEffect(() => {
+  //   const callback = (entries) => {
+  //     if(animes.status === 'pending') return;
+  //     if (entries[0].isIntersecting) {
+  //       dispatch(setPage(page + 1));
+  //     }
+  //   };
+
+  //   const options = {
+  //     root: document,
+  //     rootMargin: "50px",
+  //     threshold: 1
+  //   };
+
+  //   observer.current = new IntersectionObserver(callback, options);
+  //   if (lastItem.current) {
+  //     observer.current.observe(lastItem.current);
+  //   }
+  //   return () => {
+  //     observer.current.disconnect();
+  //   };
+  // });
 
   const animeItems = animes.items.map((item, index) => {
     if (index + 1 === animes.items.length) {
@@ -119,9 +145,10 @@ const AnimeList = () => {
             />
           </div>
           <div className={styles.items}>
-            {/* {animeItems} */}
-            {animes.status === 'pending' ? skeletons : animeItems}
+            {animeItems}
+            {animes.status === Status.PENDING && skeletons}
           </div>
+          {animes.status === Status.ERROR &&  <NotFoundAnimes />}
         </div>
       </div>
     </section>

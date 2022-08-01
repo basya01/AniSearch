@@ -1,0 +1,17 @@
+.root {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  
+  img {
+    width: 400px;
+  }
+  
+  p {
+    font-size: 25px;
+
+    span {
+      font-size: 14px;
+    }
+  }
+}

@@ -1,9 +1,15 @@
 $container-width: 1450px;
 $content-width: 1200px;
-$main-color: #6B4FC5;
-$red: #FF6262;
-$blue: #74A3FF;
-$bg-bright: #F9FAFC;
-$bg-dark: #252A2E;
-$bg-dark-add: #262B2F; 
-$font-color-dark: #A0A3A8;
+$main-color: #6b4fc5;
+$red: #ff6262;
+$blue: #74a3ff;
+$bg-bright: #f9fafc;
+$bg-dark: #252a2e;
+$bg-dark-add: #262b2f;
+$font-color-dark: #a0a3a8;
+
+@mixin animeInfoPath {
+  color: $main-color;
+  font-weight: 600;
+  font-size: 16px;
+}

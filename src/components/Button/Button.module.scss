@@ -1,0 +1,13 @@
+@import "../../styles/variables.scss";
+
+.root {
+  display: block;
+  border: none;
+  font-size: 14px;
+  padding: 14px 27px;
+  background-color: $red;
+  color: #fff;
+  font-weight: 600;
+  font-family: inherit;
+  width: 100%;
+}

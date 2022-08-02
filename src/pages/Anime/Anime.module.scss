@@ -1,5 +1,48 @@
+@import '../../styles/variables.scss';
+
 .root {
   background-color: #fff;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.11);
   padding: 50px;
+}
+
+.anime {
+  display: flex;
+}
+
+.info {
+  margin-left: 43px;
+}
+
+.mainInfo {
+  margin-top: 17px;
+  display: flex;
+}
+
+.animeImg {
+  margin-bottom: -4px;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.rating, .studio {
+  p {
+    @include animeInfoPath;
+    margin-bottom: 12px;
+  }
+}
+
+.studio {
+  img {
+    max-width: 300px;
+    max-height: 150px;
+  }
+  margin-top: 27px;
+}
+
+.stars {
+  display: flex;
 }

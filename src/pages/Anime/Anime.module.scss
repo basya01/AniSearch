@@ -8,16 +8,23 @@
 
 .anime {
   display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.head {
+  display: flex;
 }
 
 .info {
+  width: 100%;
   margin-left: 43px;
 }
 
 .mainInfo {
   margin-top: 17px;
-  column-gap: 20px;
   display: flex;
+  justify-content: space-between;
 }
 
 .animeImg {
@@ -45,4 +52,10 @@
     max-height: 150px;
   }
   margin-top: 27px;
+}
+
+.path {
+  @include animeInfoPath;
+  font-size: 17px;
+  margin-bottom: 4px;
 }

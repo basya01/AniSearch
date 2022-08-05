@@ -13,7 +13,7 @@ const Diagram: FC<{ stats: Stats[] }> = ({ stats }) => {
   return (
     <div className={styles.root}>
       {statsPx.map((item) => (
-        <div className={styles.item}>
+        <div className={styles.item} key={item.name}>
           <p className={styles.quality}>{item.value}</p>
           <div className={styles.index} style={{ height: item.height }}></div>
           <p className={styles.score}>{item.name}</p>

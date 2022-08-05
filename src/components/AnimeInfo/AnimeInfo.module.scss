@@ -1,6 +1,7 @@
 @import '../../styles/variables.scss';
 
 .infoList {
+  max-width: 500px;
   p {
     @include animeInfoPath;
   }

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { AnimeFullInfo } from '../../pages/Anime/Anime';
 import styles from './AnimeInfo.module.scss';
 
-const AnimeInfo: FC<{animeData: AnimeFullInfo}> = ({ animeData }) => {
+const AnimeInfo: FC<{anime: AnimeFullInfo}> = ({ anime }) => {
   const kind = {
     tv: 'TV Сериал',
     movie: 'Фильм',
@@ -37,38 +37,38 @@ const AnimeInfo: FC<{animeData: AnimeFullInfo}> = ({ animeData }) => {
       <ul>
         <li>
           <span>Тип: </span>
-          {kind[animeData.kind]}
+          {kind[anime.kind]}
         </li>
         <li>
           <span>Статус: </span>
-          {status[animeData.status]}
+          {status[anime.status]}
         </li>
         <li>
           <span>Кол-во серий: </span>
-          {animeData.episodes === 0 ? 'Неизвестно' : animeData.episodes}
+          {anime.episodes === 0 ? 'Неизвестно' : anime.episodes}
         </li>
         <li>
           <span>Дата релиза: </span>
-          {animeData.released_on ? animeData.released_on : 'Неизвестно'}
+          {anime.released_on ? anime.released_on : 'Неизвестно'}
         </li>
         <li>
           <span>Возрастные ограничения: </span>
-          {rating[animeData.rating]}
+          {rating[anime.rating]}
         </li>
         <li>
           <span>Продолжительность серии: </span>
-          {animeData.duration} мин
+          {anime.duration} мин
         </li>
         <li>
           <span>Озвучка: </span>
-          {animeData.fandubbers.map((item, index) =>
-            index + 1 === animeData.fandubbers.length ? item : item + ', ',
+          {anime.fandubbers.map((item, index) =>
+            index + 1 === anime.fandubbers.length ? item : item + ', ',
           )}
         </li>
         <li>
           <span>Жанры: </span>
-          {animeData.genres.map((item, index) =>
-            index + 1 === animeData.genres.length ? item.russian : item.russian + ', ',
+          {anime.genres.map((item, index) =>
+            index + 1 === anime.genres.length ? item.russian : item.russian + ', ',
           )}
         </li>
       </ul>

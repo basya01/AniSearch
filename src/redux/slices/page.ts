@@ -2,18 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface PageState {
-  activePage: number;
+  activePage: number | null;
 }
 
 const initialState: PageState = {
-  activePage: window.location.pathname === '/' ? 0 : 1,
+  activePage: 0,
 };
 
 export const pageSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    setActivePage: (state, action: PayloadAction<number>) => {
+    setActivePage: (state, action: PayloadAction<number | null>) => {
       state.activePage = action.payload;
     },
   },

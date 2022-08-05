@@ -69,15 +69,11 @@ const AnimeList = () => {
       fLoad.current = false;
       return;
     }
+
     fetchAnime();
   }, [page]);
 
-  useEffect(() => {
-    window.location.pathname === '/' ? dispatch(setActivePage(0)) : dispatch(setActivePage(1));
-  }, []);
-
-
-  const observerLoader = useRef<IntersectionObserver | null>();
+  const observerLoader = useRef<IntersectionObserver>();
   useEffect(() => {
     if (observerLoader.current) {
       observerLoader.current.disconnect();
@@ -98,30 +94,6 @@ const AnimeList = () => {
       }
     };
   }, [lastItem]);
-
-  // const observer = useRef();
-  // useEffect(() => {
-  //   const callback = (entries) => {
-  //     if(animes.status === 'pending') return;
-  //     if (entries[0].isIntersecting) {
-  //       dispatch(setPage(page + 1));
-  //     }
-  //   };
-
-  //   const options = {
-  //     root: document,
-  //     rootMargin: "50px",
-  //     threshold: 1
-  //   };
-
-  //   observer.current = new IntersectionObserver(callback, options);
-  //   if (lastItem.current) {
-  //     observer.current.observe(lastItem.current);
-  //   }
-  //   return () => {
-  //     observer.current.disconnect();
-  //   };
-  // });
 
   const animeItems = animes.items.map((item, index) => {
     if (index + 1 === animes.items.length) {
@@ -148,7 +120,7 @@ const AnimeList = () => {
             {animeItems}
             {animes.status === Status.PENDING && skeletons}
           </div>
-          {animes.status === Status.ERROR &&  <NotFoundAnimes />}
+          {animes.status === Status.ERROR && <NotFoundAnimes />}
         </div>
       </div>
     </section>

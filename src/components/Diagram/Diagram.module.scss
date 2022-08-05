@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+.root {
+  margin-top: 45px;
+  display: flex;
+  flex-direction: row-reverse;
+  column-gap: 7px;
+}
+
+.item {
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.quality {
+  width: 0;
+  color: $blue;
+  transform: rotate(-90deg);
+}
+.index {
+  background: $blue;
+  width: 18px;
+  height: 100px;
+}
+.score {
+  color: $blue;
+  opacity: 0.6;
+}

@@ -10,7 +10,7 @@ const AnimeSkeleton = () => (
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
   >
-    <rect x="-9" y="-42" rx="0" ry="0" width="267" height="470" /> 
+    <rect width="267" height="470" /> 
   </ContentLoader>
 )
 

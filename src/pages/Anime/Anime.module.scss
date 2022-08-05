@@ -16,6 +16,7 @@
 
 .mainInfo {
   margin-top: 17px;
+  column-gap: 20px;
   display: flex;
 }
 
@@ -28,21 +29,20 @@
   font-weight: 600;
 }
 
-.rating, .studio {
-  p {
-    @include animeInfoPath;
-    margin-bottom: 12px;
-  }
+.rating,
+.studio,
+.stats {
+  @include animeInfoPath;
+  margin-bottom: 12px;
 }
 
 .studio {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   img {
     max-width: 300px;
     max-height: 150px;
   }
   margin-top: 27px;
-}
-
-.stars {
-  display: flex;
 }

@@ -4,7 +4,8 @@ import { useLocation, useParams } from 'react-router-dom';
 import AnimeInfo from '../../components/AnimeInfo/AnimeInfo';
 import Button from '../../components/Button';
 import styles from './Anime.module.scss';
-import star from '../../assets/star.svg';
+import Stars from '../../components/Stars';
+import DiagramItem from '../../components/Diagram';
 
 interface Genre {
   id: number;
@@ -21,6 +22,11 @@ interface Studio {
   real: boolean;
 }
 
+export interface Stats {
+  name: number;
+  value: number;
+}
+
 export interface AnimeFullInfo {
   image: {
     original: string;
@@ -35,7 +41,9 @@ export interface AnimeFullInfo {
   duration: number;
   fandubbers: string[];
   genres: Genre[];
-  studios: Studio[]
+  studios: Studio[];
+  score: string;
+  rates_scores_stats: Stats[]
 }
 
 const Anime = () => {
@@ -71,17 +79,19 @@ const Anime = () => {
                   <div className={styles.infoBlock}>
                     <div className={styles.rating}>
                       <p>Рейтинг:</p>
-                      <div className={styles.stars}>
-                        <img src={star} alt="*" />
-                        <img src={star} alt="*" />
-                        <img src={star} alt="*" />
-                        <img src={star} alt="*" />
-                        <img src={star} alt="*" />
-                      </div>
+                      <Stars score={+animeData.score} totalStars={5} maxScore={10} />
                     </div>
                     <div className={styles.studio}>
-                      <p>Студии: </p>
-                      {animeData.studios.map(item => <img src={`https://shikimori.one/${item.image}`} alt="" key={item.id}/>)}
+                      <p>Студии:</p>
+                      {animeData.studios.map((item) => (
+                        <img src={`https://shikimori.one/${item.image}`} alt="" key={item.id} />
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles.stats}>
+                    <p>Статистика оценок:</p>
+                    <div className={styles.diagram}>
+                      <DiagramItem stats={animeData.rates_scores_stats}/>
                     </div>
                   </div>
                 </div>

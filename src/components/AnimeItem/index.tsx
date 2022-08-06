@@ -13,10 +13,11 @@ export interface AnimeItemProps {
   released_on: string | null;
   score: string;
   status: string;
+  className?: string;
 }
 
 const AnimeItem = React.forwardRef<HTMLDivElement, AnimeItemProps>((props, ref) => {
-  const { id, russian, image, released_on, score, status } = props;
+  const { id, russian, image, released_on, score, status, className } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const releasedYear = released_on ? released_on.slice(0, 4) : 'XXXX';
@@ -27,7 +28,7 @@ const AnimeItem = React.forwardRef<HTMLDivElement, AnimeItemProps>((props, ref) 
   };
 
   return (
-    <div className={styles.item} onClick={animeItemHandler} ref={ref}>
+    <div className={styles.item + `${className ? ' ' + className : ''}`} onClick={animeItemHandler} ref={ref}>
       <img src={`https://shikimori.one${image.original}`} alt="" />
       <h3 className={styles.title}>{russian}</h3>
       <div className={styles.info}>

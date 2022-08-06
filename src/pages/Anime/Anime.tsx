@@ -8,6 +8,8 @@ import Stars from '../../components/Stars';
 import DiagramItem from '../../components/Diagram';
 import Characters from '../../components/Characters';
 import Screens from '../../components/Screens';
+import Videos from '../../components/Videos';
+import Similar from '../../components/Similar';
 
 interface Genre {
   id: number;
@@ -34,6 +36,16 @@ export interface Screen {
   preview: string;
 }
 
+export interface Video {
+  id: number;
+  url: string;
+  image_url: string;
+  player_url: string;
+  name: string;
+  kind: string;
+  hosting: string;
+}
+
 export interface AnimeFullInfo {
   image: {
     original: string;
@@ -53,6 +65,7 @@ export interface AnimeFullInfo {
   rates_scores_stats: Stats[];
   description: string;
   screenshots: Screen[];
+  videos: Video[];
 }
 
 const Anime = () => {
@@ -63,7 +76,9 @@ const Anime = () => {
     axios.get(`https://shikimori.one/api/animes/${id}`).then(({ data }) => {
       setAnime(data);
     });
-  }, []);
+
+    window.scrollTo(0, 0);
+  }, [id]);
 
   return (
     <section>
@@ -120,6 +135,14 @@ const Anime = () => {
               <div className={styles.screenshots}>
                 <h2 className={styles.path}>Скриншоты</h2>
                 <Screens id={Number(id)}></Screens>
+              </div>
+              <div className={styles.videos}>
+                <h2 className={styles.path}>Видеозаписи</h2>
+                <Videos videos={anime.videos} />
+              </div>
+              <div className={styles.similar}>
+                <h2 className={styles.path}>Похожие аниме</h2>
+                <Similar id={Number(id)} />
               </div>
             </div>
           )}

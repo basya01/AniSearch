@@ -10,6 +10,18 @@ import arrowNext from '../../assets/arrow-next.svg';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+export const SampleNextArrow = ({ className, style, onClick }: any) => {
+  return (
+    <img className={className} style={{ ...style }} onClick={onClick} src={arrowNext} alt=">" />
+  );
+};
+
+export const SamplePrevArrow = ({ className, style, onClick }: any) => {
+  return (
+    <img className={className} style={{ ...style }} onClick={onClick} src={arrowPrev} alt="<" />
+  );
+};
+
 const Screens: FC<{ id: number }> = ({ id }) => {
   const [screens, setScreens] = useState<Screen[]>();
 
@@ -20,19 +32,7 @@ const Screens: FC<{ id: number }> = ({ id }) => {
     };
 
     fetchScreens();
-  }, []);
-
-  const SampleNextArrow = ({ className, style, onClick }: any) => {
-    return (
-      <img className={className} style={{...style}} onClick={onClick} src={arrowNext} alt=">"/>
-    );
-  };
-
-  const SamplePrevArrow = ({ className, style, onClick }: any) => {
-    return (
-      <img className={className} style={{...style}} onClick={onClick} src={arrowPrev} alt="<"/>
-    );
-  };
+  }, [id]);
 
   const settings = {
     dots: true,
@@ -48,10 +48,8 @@ const Screens: FC<{ id: number }> = ({ id }) => {
     <div className={styles.root}>
       {screens && (
         <Slider {...settings}>
-          {screens.map((item, index) => (
-            <div>
-              <img src={`https://shikimori.one/${item.preview}`} alt="screen" />
-            </div>
+          {screens.map((item) => (
+            <img key={item.preview} src={`https://shikimori.one/${item.preview}`} alt="screen" />
           ))}
         </Slider>
       )}

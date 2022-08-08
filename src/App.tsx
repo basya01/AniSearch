@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Anime from './pages/Anime/Anime';
 import AnimeList from './pages/AnimeList/AnimeList';
+import Character from './pages/Character';
 import { setActivePage } from './redux/slices/page';
 import { AppDispatch } from './redux/store';
 import './styles/App.scss';
@@ -28,6 +29,7 @@ const App: FC = () => {
         <Route path="" element={<AnimeList />} />
         <Route path="favorite" element={<div>Favorite</div>} />
         <Route path="anime/:id" element={<Anime />} />
+        <Route path="character/:id" element={<Character />} />
       </Route>
     </Routes>
   );

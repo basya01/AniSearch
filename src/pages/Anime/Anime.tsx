@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import AnimeInfo from '../../components/AnimeInfo/AnimeInfo';
+import AnimeInfo from '../../components/AnimeInfo';
 import Button from '../../components/Button';
 import styles from './Anime.module.scss';
 import Stars from '../../components/Stars';

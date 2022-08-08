@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Video } from '../../pages/Anime/Anime';
+import { Video } from '../../pages/Anime';
 import styles from './Videos.module.scss'
 
 const Videos: FC<{ videos: Video[] }> = ({ videos }) => {

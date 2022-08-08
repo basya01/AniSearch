@@ -1,0 +1,57 @@
+@import '../../styles/variables.scss';
+
+.root {
+  background-color: #fff;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.11);
+  padding: 50px;
+}
+
+.character {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.head {
+  display: flex;
+}
+
+.info {
+  margin-left: 43px;
+}
+
+.mainInfo {
+  p {
+    @include animeInfoPath;
+  }
+  margin-top: 17px;
+  ul {
+    margin-top: 17px;
+    li {
+      span {
+        font-weight: 500;
+      }
+      margin-top: 15px;
+    }
+  }
+}
+
+.characterImg {
+  margin-bottom: -4px;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.path {
+  @include animeInfoPath;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.animes {
+  margin: 15px;
+  display: block;
+}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
-import { Screen } from '../pages/Anime/Anime';
+import { Screen } from '../pages/Anime';
 import Slider from 'react-slick';
 
 import arrowPrev from '../assets/arrow-prev.svg';

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { AnimeFullInfo } from '../../pages/Anime/Anime';
+import { AnimeFullInfo } from '../../pages/Anime';
+import { arrayToList } from '../../utils/arrayToList';
 import styles from './AnimeInfo.module.scss';
 
 const AnimeInfo: FC<{anime: AnimeFullInfo}> = ({ anime }) => {
@@ -61,15 +62,11 @@ const AnimeInfo: FC<{anime: AnimeFullInfo}> = ({ anime }) => {
         </li>
         <li>
           <span>Озвучка: </span>
-          {anime.fandubbers.map((item, index) =>
-            index + 1 === anime.fandubbers.length ? item : item + ', ',
-          )}
+           {arrayToList(anime.fandubbers)}
         </li>
         <li>
           <span>Жанры: </span>
-          {anime.genres.map((item, index) =>
-            index + 1 === anime.genres.length ? item.russian : item.russian + ', ',
-          )}
+          {arrayToList(anime.genres, 'russian')}
         </li>
       </ul>
     </div>

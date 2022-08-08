@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import styles from './Characters.module.scss';
 
@@ -35,17 +36,19 @@ const Characters: FC<{ id: number }> = ({ id }) => {
         data.filter((item: CharacterInfo) => item.character && item.roles.includes('Main')),
       );
     };
-    
+
     fetchCharacters();
   }, [id]);
 
   return (
     <div className={styles.root}>
       {characters?.map(({ character }) => (
-        <div key={character.id}>
-          <img src={`https://shikimori.one/${character.image.preview}`} alt="" />
-          <p>{character.russian}</p>
-        </div>
+        <Link to={`/character/${character.id}`} key={character.id}>
+          <div>
+            <img src={`https://shikimori.one/${character.image.preview}`} alt="" />
+            <p>{character.russian}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );

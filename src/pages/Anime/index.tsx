@@ -10,6 +10,7 @@ import Characters from '../../components/Characters';
 import Screens from '../../components/Screens';
 import Videos from '../../components/Videos';
 import Similar from '../../components/Similar';
+import { Image } from '../Character';
 
 interface Genre {
   id: number;
@@ -47,9 +48,7 @@ export interface Video {
 }
 
 export interface AnimeFullInfo {
-  image: {
-    original: string;
-  };
+  image: Image;
   kind: 'tv' | 'movie' | 'ova' | 'ona' | 'special' | 'music' | 'tv_13' | 'tv_24' | 'tv_48';
   russian: string;
   name: string;
@@ -83,7 +82,7 @@ const Anime = () => {
   return (
     <section>
       <div className="container container__page">
-        <div className={`container__content--anime ${styles.root}`}>
+        <div className={`container__content--info-page ${styles.root}`}>
           {anime && (
             <div className={styles.anime}>
               <div className={styles.head}>

@@ -23,7 +23,6 @@ const Similiar:FC<{id: number}> = ({id}) => {
     slidesToScroll: 5,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    className: styles.root,
   };
   
   return (

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import styles from './AnimeItem.module.scss';
 import StatusIcon from '../../assets/status-icon.svg';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
 import { setActivePage } from '../../redux/slices/page';
@@ -23,22 +23,24 @@ const AnimeItem = React.forwardRef<HTMLDivElement, AnimeItemProps>((props, ref) 
   const releasedYear = released_on ? released_on.slice(0, 4) : 'XXXX';
 
   const animeItemHandler = () => {
-    navigate(`/anime/${id}`);
+    // navigate(`/anime/${id}`);
     dispatch(setActivePage(NaN));
   };
 
   return (
-    <div className={styles.item + `${className ? ' ' + className : ''}`} onClick={animeItemHandler} ref={ref}>
-      <img src={`https://shikimori.one${image.original}`} alt="" />
-      <h3 className={styles.title}>{russian}</h3>
-      <div className={styles.info}>
-        <div>
-          <img src={StatusIcon} alt="status" />
-          <p>{status}</p>
+    <Link to={`/anime/${id}`} className={styles.root + `${className ? ' ' + className : ''}`}>
+      <div className={styles.item} onClick={animeItemHandler} ref={ref}>
+        <img src={`https://shikimori.one${image.original}`} alt="" />
+        <h3 className={styles.title}>{russian}</h3>
+        <div className={styles.info}>
+          <div>
+            <img src={StatusIcon} alt="status" />
+            <p>{status}</p>
+          </div>
+          <p>{releasedYear}</p>
         </div>
-        <p>{releasedYear}</p>
       </div>
-    </div>
+    </Link>
   );
 });
 

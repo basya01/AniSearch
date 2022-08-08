@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
-import { Screen } from '../../pages/Anime/Anime';
-import styles from './Screens.module.scss';
+import { Screen } from '../pages/Anime/Anime';
 import Slider from 'react-slick';
 
-import arrowPrev from '../../assets/arrow-prev.svg';
-import arrowNext from '../../assets/arrow-next.svg';
+import arrowPrev from '../assets/arrow-prev.svg';
+import arrowNext from '../assets/arrow-next.svg';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -45,7 +44,7 @@ const Screens: FC<{ id: number }> = ({ id }) => {
   };
 
   return (
-    <div className={styles.root}>
+    <div>
       {screens && (
         <Slider {...settings}>
           {screens.map((item) => (

@@ -10,7 +10,7 @@ const initialState: PageState = {
 };
 
 export const pageSlice = createSlice({
-  name: 'counter',
+  name: 'page',
   initialState,
   reducers: {
     setActivePage: (state, action: PayloadAction<number | null>) => {

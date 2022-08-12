@@ -1,6 +1,7 @@
 @import '../../styles/variables.scss';
 
 .root {
+	position: relative;
 	display: grid;
 
 	.item {
@@ -42,6 +43,21 @@
 			}
 		}
 	}
+}
+
+.favorite {
+	top: 9px;
+	left: 9px;
+	position: absolute;
+}
+
+.score {
+	position: absolute;
+	background-color: $blue;
+	top: 10px;
+	right: 10px;
+	padding: 4px 13px;
+	color: #fff;
 }
 
 .link {

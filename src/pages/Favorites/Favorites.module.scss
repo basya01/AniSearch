@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.root {
+  margin-top: 70px;
+}
+
+.types {
+  display: flex;
+  font-size: 19px;
+  color: #000;
+  gap: 16px;
+
+  p {
+    background: #fff;
+    padding: 12px 16px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.11);
+  }
+}
+
+.list {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 43px;
+  row-gap: 43px;
+  text-align: center;
+}

@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import AnimeItem from '../../components/AnimeItem';
 import Button from '../../components/Button';
 import { SampleNextArrow, SamplePrevArrow } from '../../components/Screens';
+import SliderAnimes from '../../components/SliderAnimes';
 import { Anime } from '../../redux/slices/animes';
 import { arrayToList } from '../../utils/arrayToList';
 import styles from './Character.module.scss';
@@ -70,6 +71,7 @@ const Character: FC = () => {
                     src={`https://shikimori.one${character.image.original}`}
                     alt="anime_image"
                   />
+                  {/*@ts-ignore */}
                   <Button>Добавить в избранное</Button>
                 </div>
                 <div className={styles.info}>
@@ -103,13 +105,9 @@ const Character: FC = () => {
                 <p className={styles.path}>Описание</p>
                 <p>{character.description}</p>
               </div>
-              <div className={styles.animes}>
+              <div>
                 <p className={styles.path}>Аниме</p>
-                <Slider {...settings}>
-                  {character.animes.map((item) => (
-                    <AnimeItem key={item.id} {...item} className={styles.animes} />
-                  ))}
-                </Slider>
+                <SliderAnimes elems={character.animes} />
               </div>
             </div>
           )}

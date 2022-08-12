@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, MouseEvent } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import AnimeInfo from '../../components/AnimeInfo';
 import Button from '../../components/Button';
@@ -11,6 +11,10 @@ import Screens from '../../components/Screens';
 import Videos from '../../components/Videos';
 import Similar from '../../components/Similar';
 import { Image } from '../Character';
+import { useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/store';
+import { useDispatch } from 'react-redux';
+import { addAnime, removeAnime } from '../../redux/slices/favorites';
 
 interface Genre {
   id: number;
@@ -65,11 +69,19 @@ export interface AnimeFullInfo {
   description: string;
   screenshots: Screen[];
   videos: Video[];
+  url: string;
+  aired_on: string;
+  episodes_aired: number;
+  id: number;
 }
 
 const Anime = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const [anime, setAnime] = useState<AnimeFullInfo>();
   const { id } = useParams();
+  const isFavAnime = useSelector(
+    (state: RootState) => !!state.favorites.animes.filter((item) => item.id === Number(id)).length,
+  );
 
   useEffect(() => {
     axios.get(`https://shikimori.one/api/animes/${id}`).then(({ data }) => {
@@ -78,6 +90,33 @@ const Anime = () => {
 
     window.scrollTo(0, 0);
   }, [id]);
+
+  const buttonHandler = () => {
+    if (!anime) {
+      return;
+    }
+
+    const animePart = {
+      aired_on: anime.aired_on,
+      episodes: anime.episodes,
+      episodes_aired: anime.episodes_aired,
+      id: anime.id,
+      image: anime.image,
+      kind: anime.kind,
+      name: anime.name,
+      released_on: anime.released_on,
+      russian: anime.russian,
+      score: anime.score,
+      status: anime.status,
+      url: anime.url,
+    };
+
+    if (isFavAnime) {
+      dispatch(removeAnime(animePart));
+    } else {
+      dispatch(addAnime(animePart));
+    }
+  };
 
   return (
     <section>
@@ -92,7 +131,9 @@ const Anime = () => {
                     src={`https://shikimori.one${anime.image.original}`}
                     alt="anime_image"
                   />
-                  <Button>Добавить в избранное</Button>
+                  <Button active={isFavAnime} onClick={buttonHandler}>
+                    {isFavAnime ? 'Убрать из избранного' : 'Добавить в избранное'}
+                  </Button>
                 </div>
                 <div className={styles.info}>
                   <h2 className={styles.name}>

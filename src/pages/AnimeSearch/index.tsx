@@ -7,15 +7,14 @@ import FilterIcon from '../../assets/filter-icon.svg';
 import AnimeItem, { AnimeItemProps } from '../../components/AnimeItem';
 import AnimeSkeleton from '../../components/AnimeItem/AnimeSkeleton';
 import Filters from '../../components/Filters';
-import { Anime, clearAnimes, fetchAnimes, Status } from '../../redux/slices/animes';
+import { clearAnimes, fetchAnimes, Status } from '../../redux/slices/animes';
 import { FilterState, setPage } from '../../redux/slices/filters';
-import { setActivePage } from '../../redux/slices/page';
 import { AppDispatch, RootState } from '../../redux/store';
-import styles from './AnimeList.module.scss';
-import debounce from 'lodash.debounce';
+import styles from './AnimeSearch.module.scss';
 import NotFoundAnimes from '../../components/NotFoundAnimes';
+import AnimeList from '../../components/AnimeList/AnimeList';
 
-const AnimeList = () => {
+const AnimeSearch = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const animes = useSelector((state: RootState) => state.animes);
@@ -73,35 +72,6 @@ const AnimeList = () => {
     fetchAnime();
   }, [page]);
 
-  const observerLoader = useRef<IntersectionObserver>();
-  useEffect(() => {
-    if (observerLoader.current) {
-      observerLoader.current.disconnect();
-    }
-
-    observerLoader.current = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-      if (animes.status !== Status.SUCCESS) return;
-      if (entries[0].isIntersecting) {
-        dispatch(setPage(page + 1));
-      }
-    });
-    if (lastItem.current) {
-      observerLoader.current.observe(lastItem.current);
-    }
-    return () => {
-      if (observerLoader.current) {
-        observerLoader.current.disconnect();
-      }
-    };
-  }, [lastItem]);
-
-  const animeItems = animes.items.map((item, index) => {
-    if (index + 1 === animes.items.length) {
-      return <AnimeItem key={item.id} {...item} ref={lastItem} />;
-    }
-    return <AnimeItem key={item.id} {...item} />;
-  });
-  const skeletons = [...new Array(8)].map((_, index) => <AnimeSkeleton key={index} />);
 
   return (
     <section>
@@ -116,10 +86,7 @@ const AnimeList = () => {
               className={styles.filters}
             />
           </div>
-          <div className={styles.items}>
-            {animeItems}
-            {animes.status === Status.PENDING && skeletons}
-          </div>
+          <AnimeList />
           {animes.status === Status.ERROR && <NotFoundAnimes />}
         </div>
       </div>
@@ -127,4 +94,4 @@ const AnimeList = () => {
   );
 };
 
-export default AnimeList;
+export default AnimeSearch;

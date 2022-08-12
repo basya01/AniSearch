@@ -35,7 +35,7 @@ const initialState: FilterState = {
 };
 
 export const filtersSlice = createSlice({
-  name: 'counter',
+  name: 'filters',
   initialState,
   reducers: {
     setGenres: (state, action: PayloadAction<number>) => {

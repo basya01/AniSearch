@@ -4,9 +4,10 @@ import Slider from 'react-slick';
 import { Anime } from '../../redux/slices/animes';
 import AnimeItem from '../AnimeItem';
 import { SampleNextArrow, SamplePrevArrow } from '../Screens';
+import SliderAnimes from '../SliderAnimes';
 import styles from './Similar.module.scss';
 
-const Similiar:FC<{id: number}> = ({id}) => {
+const Similar: FC<{ id: number }> = ({ id }) => {
   const [similar, setSimilar] = useState<Anime[]>();
 
   useEffect(() => {
@@ -24,12 +25,23 @@ const Similiar:FC<{id: number}> = ({id}) => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  
-  return (
+
+  const slider = (
     <Slider {...settings}>
-      {similar && similar.slice(0, 20).map((item) => <AnimeItem key={item.id} {...item} className={styles.similar}/>)}
+      {similar &&
+        similar
+          .slice(0, 20)
+          .map((item) => <AnimeItem key={item.id} anime={item} className={styles.similar} />)}
     </Slider>
+  );
+
+  if (!similar) return <></>;
+
+  return (
+    <>
+      <SliderAnimes elems={similar} />
+    </>
   );
 };
 
-export default Similiar;
+export default Similar;

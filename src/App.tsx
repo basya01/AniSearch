@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Anime from './pages/Anime';
-import AnimeList from './pages/AnimeList';
+import AnimeList from './pages/AnimeSearch';
 import Character from './pages/Character';
+import Favorites from './pages/Favorites';
 import { setActivePage } from './redux/slices/page';
 import { AppDispatch } from './redux/store';
 import './styles/App.scss';
@@ -27,7 +28,7 @@ const App: FC = () => {
     <Routes>
       <Route path="/" element={<Header />}>
         <Route path="" element={<AnimeList />} />
-        <Route path="favorite" element={<div>Favorite</div>} />
+        <Route path="favorite" element={<Favorites />} />
         <Route path="anime/:id" element={<Anime />} />
         <Route path="character/:id" element={<Character />} />
       </Route>

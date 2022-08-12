@@ -10,4 +10,10 @@
   font-family: inherit;
   width: 100%;
   background: $red;
+  cursor: pointer;
+}
+
+.active {
+  background: #c9c9c9;
+  color: #404040;
 }

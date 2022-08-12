@@ -47,7 +47,7 @@ export const fetchAnimes = createAsyncThunk<Anime[], Record<string, string>>(
 );
 
 export const animesSlice = createSlice({
-  name: 'counter',
+  name: 'animes',
   initialState,
   reducers: {
     clearAnimes: (state) => {

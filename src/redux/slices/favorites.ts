@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CharacterInfo } from '../../components/Characters';
+import { Character } from '../../components/Characters';
 import { Anime } from './animes';
 
 
-interface Favorites {
+export interface Favorites {
   animes: Anime[];
-  characters: CharacterInfo[];
+  characters: Character[];
 }
 
 const initialState: Favorites = {
@@ -23,15 +23,15 @@ export const favoritesSlice = createSlice({
     removeAnime: (state, action: PayloadAction<Anime>) => {
       state.animes = state.animes.filter((item) => item.id !== action.payload.id);
     },
-    addCharacter: (state, action: PayloadAction<CharacterInfo>) => {
+    addCharacter: (state, action: PayloadAction<Character>) => {
       state.characters.push(action.payload);
     },
-    removeCharacter: (state, action: PayloadAction<CharacterInfo>) => {
-      state.animes = state.animes.filter((item) => item.id !== action.payload.character.id);
+    removeCharacter: (state, action: PayloadAction<Character>) => {
+      state.characters = state.characters.filter((item) => item.id !== action.payload.id);
     },
   },
 });
 
-export const { addAnime, addCharacter, removeAnime } = favoritesSlice.actions;
+export const { addAnime, addCharacter, removeAnime, removeCharacter } = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

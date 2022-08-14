@@ -2,18 +2,15 @@ import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import { Image } from '../../pages/Character';
+import CharacterItem from '../CharacterItem';
 import styles from './Characters.module.scss';
 
 export interface Character {
   id: number;
   name: string;
   russian: string;
-  image: {
-    original: string;
-    preview: string;
-    x96: string;
-    x48: string;
-  };
+  image: Image;
   url: string;
 }
 
@@ -43,12 +40,7 @@ const Characters: FC<{ id: number }> = ({ id }) => {
   return (
     <div className={styles.root}>
       {characters?.map(({ character }) => (
-        <Link to={`/character/${character.id}`} key={character.id}>
-          <div>
-            <img src={`https://shikimori.one/${character.image.preview}`} alt="" />
-            <p>{character.russian}</p>
-          </div>
-        </Link>
+        <CharacterItem key={character.id} character={character} className={styles.character}/>
       ))}
     </div>
   );

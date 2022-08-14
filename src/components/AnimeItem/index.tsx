@@ -20,16 +20,15 @@ const AnimeItem = React.forwardRef<HTMLDivElement, AnimeItemProps>(({ anime, cla
   const dispatch = useDispatch<AppDispatch>();
   const releasedYear = released_on ? released_on.slice(0, 4) : 'XXXX';
   const isFavAnimes = useSelector(
-    (state: RootState) => state.favorites.animes.filter((item) => item.id === anime.id).length,
+    (state: RootState) => !!state.favorites.animes.filter((item) => item.id === anime.id).length,
   );
 
   const animeItemHandler = () => {
-    dispatch(setActivePage(NaN));
+    // dispatch(setActivePage(NaN));
   };
 
   const favoriteHandler = (event: MouseEvent<HTMLDivElement>) => {
-    console.log(!!isFavAnimes);
-    if (!!isFavAnimes) {
+    if (isFavAnimes) {
       dispatch(removeAnime(anime));
     } else {
       dispatch(addAnime(anime));

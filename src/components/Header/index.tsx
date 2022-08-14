@@ -13,18 +13,13 @@ const Header: FC = () => {
 
   const NavItemsData = [
     { id: 0, value: 'Список аниме', link: '/' },
-    { id: 1, value: 'Избранное', link: 'favorite' },
+    { id: 1, value: 'Избранное', link: 'favorites/animes' },
   ];
-
-  const pageHandler = (id: number) => {
-    dispatch(setActivePage(id));
-  };
 
   const NavItems = NavItemsData.map((item) => (
     <div className={styles.navItem} key={item.id}>
       <Link
         to={item.link}
-        onClick={() => pageHandler(item.id)}
         className={activePage === item.id ? styles.active : ''}>
         {item.value}
       </Link>

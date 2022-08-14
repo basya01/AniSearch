@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import AnimeItem from '../../components/AnimeItem';
@@ -7,6 +8,8 @@ import Button from '../../components/Button';
 import { SampleNextArrow, SamplePrevArrow } from '../../components/Screens';
 import SliderAnimes from '../../components/SliderAnimes';
 import { Anime } from '../../redux/slices/animes';
+import { addCharacter, removeCharacter } from '../../redux/slices/favorites';
+import { AppDispatch, RootState } from '../../redux/store';
 import { arrayToList } from '../../utils/arrayToList';
 import styles from './Character.module.scss';
 
@@ -26,9 +29,8 @@ interface Seyu {
 }
 
 interface CharacterFull {
-  image: {
-    original: string;
-  };
+  id: number;
+  image: Image;
   russian: string;
   name: string;
   altname: string;
@@ -36,11 +38,13 @@ interface CharacterFull {
   seyu: Seyu[];
   animes: Anime[];
   description: string;
+  url: string;
 }
 
 const Character: FC = () => {
   const [character, setCharacter] = useState<CharacterFull>();
   const { id } = useParams();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     axios.get(`https://shikimori.one/api/characters/${id}`).then(({ data }) => {
@@ -58,6 +62,29 @@ const Character: FC = () => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  const isFavCharacter = useSelector(
+    (state: RootState) =>
+      !!state.favorites.characters.filter((item) => item.id === Number(id)).length,
+  );
+
+  const buttonFavHandler = () => {
+    if (!character) return;
+
+    const characterPart = {
+      id: character.id,
+      name: character.name,
+      russian: character.russian,
+      image: character.image,
+      url: character.url,
+    };
+
+    if (isFavCharacter && characterPart) {
+      dispatch(removeCharacter(characterPart));
+    } else {
+      dispatch(addCharacter(characterPart));
+    }
+  };
+
   return (
     <section>
       <div className="container container__page">
@@ -71,8 +98,9 @@ const Character: FC = () => {
                     src={`https://shikimori.one${character.image.original}`}
                     alt="anime_image"
                   />
-                  {/*@ts-ignore */}
-                  <Button>Добавить в избранное</Button>
+                  <Button active={isFavCharacter} onClick={buttonFavHandler}>
+                    {isFavCharacter ? 'Убрать из избранного' : 'Добавить в избранное'}
+                  </Button>
                 </div>
                 <div className={styles.info}>
                   <h1 className={styles.name}>

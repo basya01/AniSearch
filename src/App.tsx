@@ -6,6 +6,7 @@ import Anime from './pages/Anime';
 import AnimeList from './pages/AnimeSearch';
 import Character from './pages/Character';
 import Favorites from './pages/Favorites';
+import NotFound from './pages/NotFound';
 import { setActivePage } from './redux/slices/page';
 import { AppDispatch } from './redux/store';
 import './styles/App.scss';
@@ -33,6 +34,7 @@ const App: FC = () => {
         <Route path="favorites/:type" element={<Favorites />} />
         <Route path="anime/:id" element={<Anime />} />
         <Route path="character/:id" element={<Character />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

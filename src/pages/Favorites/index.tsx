@@ -6,6 +6,7 @@ import CharacterItem from '../../components/CharacterItem';
 import { Anime } from '../../redux/slices/animes';
 import { Favorites as IFavorites } from '../../redux/slices/favorites';
 import { RootState } from '../../redux/store';
+import NotFound from '../NotFound';
 import styles from './Favorites.module.scss';
 
 const Favorites = () => {
@@ -28,9 +29,7 @@ const Favorites = () => {
 
   if (type !== 'animes' && type !== 'characters') {
     return (
-      <div className={`container container__page`}>
-        <h1>{'Страница не найдена :('}</h1>;
-      </div>
+      <NotFound />
     );
   }
 

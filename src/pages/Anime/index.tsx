@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState, MouseEvent } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import AnimeInfo from '../../components/AnimeInfo';
 import Button from '../../components/Button';
 import styles from './Anime.module.scss';
@@ -10,77 +10,16 @@ import Characters from '../../components/Characters';
 import Screens from '../../components/Screens';
 import Videos from '../../components/Videos';
 import Similar from '../../components/Similar';
-import { Image } from '../Character';
-import { useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
-import { useDispatch } from 'react-redux';
 import { addAnime, removeAnime } from '../../redux/slices/favorites';
-
-interface Genre {
-  id: number;
-  name: string;
-  russian: string;
-  kind: string;
-}
-
-interface Studio {
-  filtered_name: string;
-  id: number;
-  image: string;
-  name: string;
-  real: boolean;
-}
-
-export interface Stats {
-  name: number;
-  value: number;
-}
-
-export interface Screen {
-  original: string;
-  preview: string;
-}
-
-export interface Video {
-  id: number;
-  url: string;
-  image_url: string;
-  player_url: string;
-  name: string;
-  kind: string;
-  hosting: string;
-}
-
-export interface AnimeFullInfo {
-  image: Image;
-  kind: 'tv' | 'movie' | 'ova' | 'ona' | 'special' | 'music' | 'tv_13' | 'tv_24' | 'tv_48';
-  russian: string;
-  name: string;
-  status: 'anons' | 'ongoing' | 'released';
-  episodes: number;
-  released_on: string;
-  rating: 'none' | 'g' | 'pg' | 'r' | 'r_plus' | 'rx';
-  duration: number;
-  fandubbers: string[];
-  genres: Genre[];
-  studios: Studio[];
-  score: string;
-  rates_scores_stats: Stats[];
-  description: string;
-  screenshots: Screen[];
-  videos: Video[];
-  url: string;
-  aired_on: string;
-  episodes_aired: number;
-  id: number;
-}
+import { AnimeFull } from '../../models/AnimeFull';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const Anime = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const [anime, setAnime] = useState<AnimeFullInfo>();
+  const dispatch = useAppDispatch();
+  const [anime, setAnime] = useState<AnimeFull>();
   const { id } = useParams();
-  const isFavAnime = useSelector(
-    (state: RootState) => !!state.favorites.animes.filter((item) => item.id === Number(id)).length,
+  const isFavAnime = useAppSelector(
+    (state) => !!state.favorites.animes.filter((item) => item.id === Number(id)).length,
   );
 
   useEffect(() => {

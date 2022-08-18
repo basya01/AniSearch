@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import AnimeItem from '../../components/AnimeItem';
 import CharacterItem from '../../components/CharacterItem';
-import { Anime } from '../../redux/slices/animes';
+import { useAppSelector } from '../../hooks/redux';
 import { Favorites as IFavorites } from '../../redux/slices/favorites';
-import { RootState } from '../../redux/store';
 import NotFound from '../NotFound';
 import styles from './Favorites.module.scss';
 
 const Favorites = () => {
-  const { animes, characters } = useSelector<RootState, IFavorites>((state) => state.favorites);
+  const { animes, characters } = useAppSelector((state) => state.favorites);
   const { type } = useParams();
 
   const { pathname } = useLocation();

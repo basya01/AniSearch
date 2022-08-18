@@ -1,50 +1,21 @@
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import AnimeItem from '../../components/AnimeItem';
 import Button from '../../components/Button';
 import { SampleNextArrow, SamplePrevArrow } from '../../components/Screens';
 import SliderAnimes from '../../components/SliderAnimes';
-import { Anime } from '../../redux/slices/animes';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { CharacterFull } from '../../models/CharacterFull';
 import { addCharacter, removeCharacter } from '../../redux/slices/favorites';
-import { AppDispatch, RootState } from '../../redux/store';
 import { arrayToList } from '../../utils/arrayToList';
 import styles from './Character.module.scss';
-
-export interface Image {
-  original: string;
-  preview: string;
-  x48: string;
-  x96: string;
-}
-
-interface Seyu {
-  id: number;
-  image: Image;
-  name: string;
-  russian: string;
-  url: string;
-}
-
-interface CharacterFull {
-  id: number;
-  image: Image;
-  russian: string;
-  name: string;
-  altname: string;
-  japanese: string;
-  seyu: Seyu[];
-  animes: Anime[];
-  description: string;
-  url: string;
-}
 
 const Character: FC = () => {
   const [character, setCharacter] = useState<CharacterFull>();
   const { id } = useParams();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     axios.get(`https://shikimori.one/api/characters/${id}`).then(({ data }) => {
@@ -62,8 +33,8 @@ const Character: FC = () => {
     prevArrow: <SamplePrevArrow />,
   };
 
-  const isFavCharacter = useSelector(
-    (state: RootState) =>
+  const isFavCharacter = useAppSelector(
+    (state) =>
       !!state.favorites.characters.filter((item) => item.id === Number(id)).length,
   );
 

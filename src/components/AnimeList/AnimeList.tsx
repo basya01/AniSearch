@@ -1,16 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Animes, Status } from '../../redux/slices/animes';
 import { FilterState, setPage } from '../../redux/slices/filters';
-import { AppDispatch, RootState } from '../../redux/store';
 import AnimeItem from '../AnimeItem';
 import AnimeSkeleton from '../AnimeItem/AnimeSkeleton';
 import styles from './AnimeList.module.scss';
 
 const AnimeList = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const animes = useSelector((state: RootState) => state.animes);
-  const page = useSelector<RootState, number>((state) => state.filters.page);
+  const dispatch = useAppDispatch();
+  const animes = useAppSelector((state) => state.animes);
+  const page = useAppSelector((state) => state.filters.page);
 
   const lastItem = React.createRef<HTMLDivElement>();
   const observerLoader = useRef<IntersectionObserver>();

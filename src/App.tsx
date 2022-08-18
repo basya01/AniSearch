@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
+import { useAppDispatch } from './hooks/redux';
 import Anime from './pages/Anime';
 import AnimeList from './pages/AnimeSearch';
 import Character from './pages/Character';
@@ -13,8 +14,7 @@ import './styles/App.scss';
 import './styles/reset.scss';
 
 const App: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  console.log(useLocation());
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
 
   useEffect(() => {

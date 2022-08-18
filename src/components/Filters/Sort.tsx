@@ -2,9 +2,7 @@ import React, { FC, useState } from 'react';
 import styles from './Filters.module.scss';
 import arrow from '../../assets/arrow-icon.svg';
 import { setSort } from '../../redux/slices/filters';
-import { useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
-import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const Sort: FC = () => {
   const sort = {
@@ -16,8 +14,8 @@ const Sort: FC = () => {
     ],
   };
   
-  const dispatch = useDispatch<AppDispatch>();
-  const selectedSort = useSelector<RootState, string>(state => state.filters.sort);
+  const dispatch = useAppDispatch();
+  const selectedSort = useAppSelector(state => state.filters.sort);
   const [isOpen , setIsOpen] = useState(false);
 
   const sortItemsJSX = sort.items.map((item) => (

@@ -1,10 +1,10 @@
 import React, { FC, MouseEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { Character } from '../../models/Character';
 import { addCharacter, removeCharacter } from '../../redux/slices/favorites';
-import { AppDispatch, RootState } from '../../redux/store';
+import { AppDispatch,  } from '../../redux/store';
 import FavoriteIcon from '../AnimeItem/FavoriteIcon';
-import { Character } from '../Characters';
 
 import styles from './CharacterItem.module.scss';
 
@@ -14,10 +14,10 @@ export interface CharacterItemProps {
 }
 
 const CharacterItem: FC<CharacterItemProps> = ({ character, className }) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   
-  const isFavCharacter = useSelector(
-    (state: RootState) =>
+  const isFavCharacter = useAppSelector(
+    (state) =>
       !!state.favorites.characters.filter((item) => item.id === Number(character.id)).length,
   );
 

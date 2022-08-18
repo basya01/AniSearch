@@ -1,15 +1,12 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
-import { setActivePage } from '../../redux/slices/page';
-import { AppDispatch, RootState } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import styles from './Header.module.scss';
 import Search from './Search';
 
 const Header: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const activePage = useSelector((state: RootState) => state.page.activePage);
+  const dispatch = useAppDispatch();
+  const activePage = useAppSelector((state) => state.page.activePage);
 
   const NavItemsData = [
     { id: 0, value: 'Список аниме', link: '/' },

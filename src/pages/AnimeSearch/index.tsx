@@ -1,7 +1,5 @@
 import qs from 'qs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FilterIcon from '../../assets/filter-icon.svg';
 import AnimeItem, { AnimeItemProps } from '../../components/AnimeItem';
@@ -9,22 +7,19 @@ import AnimeSkeleton from '../../components/AnimeItem/AnimeSkeleton';
 import Filters from '../../components/Filters';
 import { clearAnimes, fetchAnimes, Status } from '../../redux/slices/animes';
 import { FilterState, setPage } from '../../redux/slices/filters';
-import { AppDispatch, RootState } from '../../redux/store';
 import styles from './AnimeSearch.module.scss';
 import NotFoundAnimes from '../../components/NotFoundAnimes';
 import AnimeList from '../../components/AnimeList/AnimeList';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const AnimeSearch = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const animes = useSelector((state: RootState) => state.animes);
+  const animes = useAppSelector((state) => state.animes);
   const [filtersOpen, setFilterOpen] = useState(false);
   const lastItem = React.createRef<HTMLDivElement>();
 
-  const { genres, sort, status, duration, kind, search, page } = useSelector<
-    RootState,
-    FilterState
-  >((state) => state.filters);
+  const { genres, sort, status, duration, kind, search, page } = useAppSelector((state) => state.filters);
 
   const fetchAnime = () => {
     const queryParams = {

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Stats } from '../../pages/Anime';
+import { Stats } from '../../models/Filters';
 import styles from './Diagram.module.scss';
 
 const Diagram: FC<{ stats: Stats[] }> = ({ stats }) => {

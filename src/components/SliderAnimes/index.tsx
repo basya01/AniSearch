@@ -1,15 +1,11 @@
 import React, { FC } from 'react';
 import Slider from 'react-slick';
-import { Anime } from '../../redux/slices/animes';
+import { Anime } from '../../models/Anime';
 import AnimeItem from '../AnimeItem';
 import { SampleNextArrow, SamplePrevArrow } from '../Screens';
 import styles from './SliderAnimes.module.scss';
 
-interface SliderAnimesProps {
-  elems: Anime[];
-}
-
-const SliderAnimes: FC<SliderAnimesProps> = ({ elems }) => {
+const SliderAnimes: FC<{elems: Anime[]}> = ({ elems }) => {
   const settings = {
     dots: true,
     infinite: true,

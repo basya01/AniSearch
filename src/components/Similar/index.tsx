@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import { Anime } from '../../redux/slices/animes';
+import { Anime } from '../../models/Anime';
 import AnimeItem from '../AnimeItem';
 import { SampleNextArrow, SamplePrevArrow } from '../Screens';
 import SliderAnimes from '../SliderAnimes';

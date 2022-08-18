@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { AnimeFullInfo } from '../../pages/Anime';
+import { AnimeFull } from '../../models/AnimeFull';
 import { arrayToList } from '../../utils/arrayToList';
 import styles from './AnimeInfo.module.scss';
 
-const AnimeInfo: FC<{anime: AnimeFullInfo}> = ({ anime }) => {
+const AnimeInfo: FC<{ anime: AnimeFull }> = ({ anime }) => {
   const kind = {
     tv: 'TV Сериал',
     movie: 'Фильм',
@@ -62,7 +62,7 @@ const AnimeInfo: FC<{anime: AnimeFullInfo}> = ({ anime }) => {
         </li>
         <li>
           <span>Озвучка: </span>
-           {arrayToList(anime.fandubbers)}
+          {arrayToList(anime.fandubbers)}
         </li>
         <li>
           <span>Жанры: </span>

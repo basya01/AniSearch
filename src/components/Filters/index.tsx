@@ -5,24 +5,11 @@ import xmark from '../../assets/xmark.svg';
 import Sort from './Sort';
 import FilterItem from './FilterItem';
 import { setDuration, setKind, setStatus } from '../../redux/slices/filters';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useAppSelector } from '../../hooks/redux';
 
 interface FiltersProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-export interface Filter {
-  id: number;
-  kind?: string;
-  name: string;
-  russian: string;
-}
-
-export interface FilterData {
-  name: string;
-  items: Filter[];
 }
 
 const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
@@ -59,9 +46,7 @@ const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
     ],
   };
 
-  const selectedStatus = useSelector<RootState, string>((state) => state.filters.status);
-  const selectedDuration = useSelector<RootState, string>((state) => state.filters.duration);
-  const selectedKind = useSelector<RootState, string>((state) => state.filters.kind);
+  const filters = useAppSelector((state) => state.filters);
 
   return (
     <div className={`${styles.filters} ${isOpen ? styles.open : ''}`}>
@@ -75,9 +60,9 @@ const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
         <p className={styles.filterPath}>Фильтры</p>
         <Sort />
         <Genres />
-        <FilterItem filter={status} setState={setStatus} selected={selectedStatus} />
-        <FilterItem filter={duration} setState={setDuration} selected={selectedDuration} />
-        <FilterItem filter={kind} setState={setKind} selected={selectedKind} />
+        <FilterItem filter={status} setState={setStatus} selected={filters.status} />
+        <FilterItem filter={duration} setState={setDuration} selected={filters.duration} />
+        <FilterItem filter={kind} setState={setKind} selected={filters.kind} />
       </div>
     </div>
   );

@@ -1,19 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from './Filters.module.scss';
 import arrow from '../../assets/arrow-icon.svg';
-import { Filter, FilterData } from './index';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
 import { setGenres } from '../../redux/slices/filters';
-import { useSelector } from 'react-redux';
 import xmark from '../../assets/xmark-genre.svg';
+import { Filter, FilterData } from '../../models/Filters';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const Genres: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [genresList, setGenresList] = useState<FilterData>({ name: 'Жанры', items: [] });
-  const genres = useSelector<RootState, number[]>((state) => state.filters.genres);
-  const dispatch = useDispatch<AppDispatch>();
+  const genres = useAppSelector((state) => state.filters.genres);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchGenres = async () => {

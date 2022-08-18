@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Character } from '../../components/Characters';
-import { Anime } from './animes';
+import { Anime } from '../../models/Anime';
+import { Character } from '../../models/Character';
 
 
 export interface Favorites {

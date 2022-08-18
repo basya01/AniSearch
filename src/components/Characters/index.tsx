@@ -2,35 +2,18 @@ import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import { Image } from '../../pages/Character';
+import { Character, Role } from '../../models/Character';
 import CharacterItem from '../CharacterItem';
 import styles from './Characters.module.scss';
 
-export interface Character {
-  id: number;
-  name: string;
-  russian: string;
-  image: Image;
-  url: string;
-}
-
-export interface CharacterInfo {
-  roles: string[];
-  roles_russian: string[];
-  character: Character;
-  person: string;
-}
-
-export type Characters = CharacterInfo[];
-
 const Characters: FC<{ id: number }> = ({ id }) => {
-  const [characters, setCharacters] = useState<Characters>();
+  const [characters, setCharacters] = useState<Role[]>();
 
   useEffect(() => {
     const fetchCharacters = async () => {
       const { data } = await axios.get(`https://shikimori.one/api/animes/${id}/roles`);
       setCharacters(
-        data.filter((item: CharacterInfo) => item.character && item.roles.includes('Main')),
+        data.filter((item: Role) => item.character && item.roles.includes('Main')),
       );
     };
 

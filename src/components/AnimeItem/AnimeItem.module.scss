@@ -86,13 +86,3 @@
     font-size: 11px;
   }
 }
-
-@media screen and (max-width: 790px) {
-  .root {
-    .favorite {
-      top: -7px;
-      left: -7px;
-      transform: scale(0.55);
-    }
-  }
-}

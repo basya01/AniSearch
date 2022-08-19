@@ -3,9 +3,9 @@
 .filters {
   position: fixed;
   height: 100vh;
-  width: 335px;
+  width: 280px;
   background: #fff;
-  left: -335px;
+  left: -100%;
   z-index: 1000;
   transition: left 0.15s ease-in-out;
 }
@@ -60,7 +60,7 @@
   color: $main-color;
 }
 
-@mixin list {
+.list {
   margin-top: 8px;
   p {
     cursor: pointer;
@@ -86,7 +86,6 @@
   }
 }
 .sort {
-  @include list;
   li {
     .active {
       display: inline;
@@ -97,7 +96,6 @@
 }
 
 .genres {
-  @include list;
   li {
     display: flex;
     align-items: center;
@@ -110,7 +108,6 @@
 }
 
 .filter {
-  @include list;
   li {
     display: flex;
     align-items: center;

@@ -25,7 +25,7 @@ const Sort: FC = () => {
   ));
 
   return (
-    <div className={styles.sort}>
+    <div className={styles.sort  + " " + styles.list}>
       <p onClick={() => setIsOpen(!isOpen)}>
         {sort.name} <img className={isOpen ? styles.open : ''} src={arrow} alt="^" />
       </p>

@@ -1,17 +1,15 @@
-import React from "react"
-import ContentLoader from "react-content-loader";
+import React from 'react';
+import ContentLoader from 'react-content-loader';
 
 const AnimeSkeleton = () => (
-  <ContentLoader 
+  <ContentLoader
     speed={2}
-    width={267}
-    height={470}
-    viewBox="0 0 267 470"
+    width={'100%'}
+    height={420}
     backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
-  >
-    <rect width="267" height="470" /> 
+    foregroundColor="#ecebeb">
+    <rect width="100%" height="420" />
   </ContentLoader>
-)
+);
 
-export default AnimeSkeleton
+export default AnimeSkeleton;

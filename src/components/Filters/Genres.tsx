@@ -32,7 +32,7 @@ const Genres: FC = () => {
   ));
 
   return (
-    <div className={styles.genres}>
+    <div className={styles.genres + " " + styles.list}>
       <p onClick={() => setIsOpen(!isOpen)}>
         {genresList.name} <img className={isOpen ? styles.open : '' } src={arrow} alt="^" />
       </p>

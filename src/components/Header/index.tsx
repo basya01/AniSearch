@@ -1,12 +1,21 @@
-import { FC } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { FC, useEffect, useState } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import styles from './Header.module.scss';
 import Search from './Search';
 
 const Header: FC = () => {
-  const dispatch = useAppDispatch();
-  const activePage = useAppSelector((state) => state.page.activePage);
+  const [activePage, setActivePage] = useState<number | null>();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname === '/') {
+      setActivePage(0);
+    } else if (pathname.includes('/favorites/')) {
+      setActivePage(1);
+    } else {
+      setActivePage(null);
+    }
+  }, [pathname]);
 
   const NavItemsData = [
     { id: 0, value: 'Список аниме', link: '/' },

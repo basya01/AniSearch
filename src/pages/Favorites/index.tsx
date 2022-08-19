@@ -34,7 +34,7 @@ const Favorites = () => {
   return (
     <section>
       <div className={`container container__page`}>
-        <div className={styles.root}>
+        <div className={styles.root + " " + "container__content"}>
           <div className={styles.types}>
             <Link to="/favorites/animes">
               <p className={activeType === 0 ? styles.active : ''}>Аниме</p>

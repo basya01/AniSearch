@@ -27,7 +27,7 @@ const FilterItem: FC<FilterItemProps> = ({ filter, setState, selected }) => {
 
   return (
     <div>
-      <div className={styles.filter}>
+      <div className={styles.filter  + " " + styles.list}>
         <p onClick={() => setIsOpen(!isOpen)}>
           {filter.name} <img className={isOpen ? styles.open : ''} src={arrow} alt="^" />
         </p>

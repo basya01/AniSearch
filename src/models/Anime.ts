@@ -1,9 +1,11 @@
+import { Image } from "./Image";
+
 export interface Anime {
   aired_on: string;
   episodes: number;
   episodes_aired: number;
   id: number;
-  image: { original: string };
+  image: Image;
   kind: string;
   name: string;
   released_on: string | null;

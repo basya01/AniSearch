@@ -3,7 +3,6 @@ import styles from './AnimeItem.module.scss';
 import StatusIcon from '../../assets/status-icon.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setActivePage } from '../../redux/slices/page';
 import FavoriteIcon from './FavoriteIcon';
 import { addAnime, removeAnime } from '../../redux/slices/favorites';
 import { Anime } from '../../models/Anime';

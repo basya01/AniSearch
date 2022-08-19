@@ -54,7 +54,7 @@ const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
         <h1 className={styles.logo}>
           <span>Ani</span>Search
         </h1>
-        <img onClick={() => setIsOpen(false)} src={xmark} alt="x" />
+        <img className={styles.xmark} onClick={() => setIsOpen(false)} src={xmark} alt="x" />
       </div>
       <div className={`${styles.container} ${styles.containerFilters}`}>
         <p className={styles.filterPath}>Фильтры</p>

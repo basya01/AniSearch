@@ -1,65 +1,98 @@
 @import '../../styles/variables.scss';
 
 .root {
-	position: relative;
 	display: grid;
+}
 
-	.item {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		background: #fff;
-		box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.11);
-		padding: 21px 21px 24px 21px;
-		cursor: pointer;
-		transition: all 0.2s;
-		&:hover {
-			transform: scale(1.05);
-			.title {
-				color: $main-color;
-			}
-		}
-	}
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.11);
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.05);
+    .title {
+      color: $main-color;
+    }
+  }
+}
 
-	.title {
-		font-size: 17px;
-		margin-top: 15px;
-		line-height: 21px;
-	}
+.title {
+  padding: 0 10px;
+  font-size: 16px;
+  margin-top: 10px;
+}
 
-	.info {
-		color: $blue;
-		margin-top: 6px;
-		display: flex;
-		justify-content: space-between;
+.info {
+  padding: 0 10px 14px 10px;
+  color: $blue;
+  font-size: 12px;
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-		div {
-			display: flex;
-			p {
-				&::first-letter {
-					text-transform: uppercase;
-				}
-				margin-left: 3px;
-			}
-		}
-	}
+  div {
+    display: flex;
+    align-items: center;
+    p {
+      &::first-letter {
+        text-transform: uppercase;
+      }
+      margin-left: 3px;
+    }
+  }
 }
 
 .favorite {
-	top: 9px;
-	left: 9px;
-	position: absolute;
+  top: 6px;
+  left: 6px;
+  position: absolute;
 }
 
 .score {
-	position: absolute;
-	background-color: $blue;
-	top: 10px;
-	right: 10px;
-	padding: 4px 13px;
-	color: #fff;
+  position: absolute;
+  background-color: $blue;
+  top: 0;
+  right: 0;
+  padding: 4px 13px;
+  color: #fff;
 }
 
 .link {
-	display: grid;
+  display: grid;
+}
+
+@media screen and (max-width: 1480px) {
+  .root {
+    .favorite {
+      top: 0px;
+      left: 0px;
+      transform: scale(0.8);
+    }
+  }
+  .score {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+  .title {
+    font-size: 14px;
+  }
+  .info {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .root {
+    .favorite {
+      top: -7px;
+      left: -7px;
+      transform: scale(0.55);
+    }
+  }
 }

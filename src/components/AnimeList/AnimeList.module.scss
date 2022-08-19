@@ -1,7 +1,45 @@
 .root {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   column-gap: 43px;
   row-gap: 43px;
   text-align: center;
+  margin-left: 100px;
+
+  img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1480px) {
+  .root {
+    column-gap: 30px;
+    row-gap: 30px;
+    margin-left: 85px;
+  }
+}
+
+@media screen and (max-width: 1225px) {
+  .root {
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .root {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .root {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .root {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

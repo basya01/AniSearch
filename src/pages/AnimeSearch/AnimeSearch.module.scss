@@ -7,13 +7,16 @@
   filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.11));
 }
 
-.wrapper {
-  position: absolute;
-  top: 0;
-  left: -96px;
-}
-
 .position {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
   position: relative;
 }
 
+@media screen and (max-width: 1480px) {
+  .filters {
+    width: 35px;
+    padding: 14px;
+  }
+}

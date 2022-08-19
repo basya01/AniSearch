@@ -19,7 +19,9 @@ const AnimeSearch = () => {
   const [filtersOpen, setFilterOpen] = useState(false);
   const lastItem = React.createRef<HTMLDivElement>();
 
-  const { genres, sort, status, duration, kind, search, page } = useAppSelector((state) => state.filters);
+  const { genres, sort, status, duration, kind, search, page } = useAppSelector(
+    (state) => state.filters,
+  );
 
   const fetchAnime = () => {
     const queryParams = {
@@ -67,13 +69,12 @@ const AnimeSearch = () => {
     fetchAnime();
   }, [page]);
 
-
   return (
     <section>
       <Filters isOpen={filtersOpen} setIsOpen={setFilterOpen} />
       <div className="container container__page">
         <div className={`container__content ${styles.position}`}>
-          <div className={styles.wrapper}>
+          <div className={styles.filterIcon}>
             <img
               onClick={() => setFilterOpen(!filtersOpen)}
               src={FilterIcon}

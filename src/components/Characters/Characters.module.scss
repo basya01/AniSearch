@@ -1,10 +1,26 @@
 .root {
-  display: flex;
-  gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: 25px;
+  column-gap: 25px;
   text-align: center;
-  flex-wrap: wrap;
+  img {
+    width: 100%;
+  }
 }
 
-.character {
-  width: 208px;
+@media screen and (max-width: 980px) {
+  .root {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media screen and (max-width: 790px) {
+  .root {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 500px) {
+  .root {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

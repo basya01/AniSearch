@@ -1,11 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { Anime } from '../../models/Anime';
 import AnimeItem from '../AnimeItem';
 import { SampleNextArrow, SamplePrevArrow } from '../Screens';
 import styles from './SliderAnimes.module.scss';
 
-const SliderAnimes: FC<{elems: Anime[]}> = ({ elems }) => {
+interface SliderAnimesProps {
+  elems: Anime[];
+}
+
+const SliderAnimes: FC<SliderAnimesProps> = ({ elems }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -14,6 +18,31 @@ const SliderAnimes: FC<{elems: Anime[]}> = ({ elems }) => {
     slidesToScroll: 5,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1225,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        }
+      },
+      {
+        breakpoint: 790,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          dots: false,
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          dots: false,
+        }
+      }
+    ]
   };
 
   if (!elems) return <></>;

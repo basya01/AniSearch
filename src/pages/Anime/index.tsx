@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AnimeInfo from '../../components/AnimeInfo';
 import Button from '../../components/Button';
@@ -64,12 +64,8 @@ const Anime = () => {
           {anime && (
             <div className={styles.anime}>
               <div className={styles.head}>
-                <div>
-                  <img
-                    className={styles.animeImg}
-                    src={`https://shikimori.one${anime.image.original}`}
-                    alt="anime_image"
-                  />
+                <div className={styles.animeImg}>
+                  <img src={`https://shikimori.one${anime.image.original}`} alt="anime_image" />
                   <Button active={isFavAnime} onClick={buttonHandler}>
                     {isFavAnime ? 'Убрать из избранного' : 'Добавить в избранное'}
                   </Button>

@@ -22,7 +22,11 @@ export const SamplePrevArrow = ({ className, style, onClick }: any) => {
   );
 };
 
-const Screens: FC<{ id: number }> = ({ id }) => {
+interface ScreensProps {
+  id: number;
+}
+
+const Screens: FC<ScreensProps> = ({ id }) => {
   const [screens, setScreens] = useState<Screen[]>();
 
   useEffect(() => {
@@ -42,6 +46,31 @@ const Screens: FC<{ id: number }> = ({ id }) => {
     slidesToScroll: 4,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1225,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 790,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          dots: false,
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: false,
+        }
+      }
+    ]
   };
 
   return (

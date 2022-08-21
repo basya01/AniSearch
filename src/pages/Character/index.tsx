@@ -34,8 +34,7 @@ const Character: FC = () => {
   };
 
   const isFavCharacter = useAppSelector(
-    (state) =>
-      !!state.favorites.characters.filter((item) => item.id === Number(id)).length,
+    (state) => !!state.favorites.characters.filter((item) => item.id === Number(id)).length,
   );
 
   const buttonFavHandler = () => {
@@ -63,12 +62,8 @@ const Character: FC = () => {
           {character && (
             <div className={styles.character}>
               <div className={styles.head}>
-                <div>
-                  <img
-                    className={styles.characterImg}
-                    src={`https://shikimori.one${character.image.original}`}
-                    alt="anime_image"
-                  />
+                <div className={styles.characterImg}>
+                  <img src={`https://shikimori.one${character.image.original}`} alt="anime_image" />
                   <Button active={isFavCharacter} onClick={buttonFavHandler}>
                     {isFavCharacter ? 'Убрать из избранного' : 'Добавить в избранное'}
                   </Button>

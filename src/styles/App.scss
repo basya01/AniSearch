@@ -55,5 +55,8 @@ html {
 @media screen and (max-width: 500px) {
   .container {
     width: 320px;
+    &__page {
+      padding: 83px 15px 0 15px;
+    }
   }
 }

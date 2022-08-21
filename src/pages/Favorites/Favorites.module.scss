@@ -21,7 +21,7 @@
 .list {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   column-gap: 43px;
   row-gap: 43px;
   text-align: center;
@@ -34,4 +34,31 @@
 .active {
   color: $main-color;
   border-bottom: 3px solid $main-color;
+}
+
+@media screen and (max-width: 1225px) {
+  .list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .list {
+    column-gap: 30px;
+    row-gap: 30px;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .list {
+    column-gap: 20px;
+    row-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

@@ -37,7 +37,11 @@
 }
 
 .characterImg {
-  margin-bottom: -4px;
+  img {
+    margin-bottom: -4px;
+  }
+  max-width: 225px;
+  margin: 0px auto 24px auto;
 }
 
 .name {
@@ -54,4 +58,16 @@
 .animes {
   margin: 15px;
   display: block;
+}
+
+@media screen and (max-width: 790px) {
+  .root {
+    padding: 30px;
+  }
+  .head {
+    flex-direction: column;
+  }
+  .info {
+    margin-left: 0;
+  }
 }

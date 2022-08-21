@@ -8,6 +8,16 @@
 }
 
 .elem {
-  margin: 15px;
+  margin: 0 15px;
   display: block;
+}
+
+@media screen and (max-width: 790px) {
+  .noSlider {
+    margin-top: 0 7px;
+  }
+  
+  .elem {
+    margin: 0 7px;
+  }
 }

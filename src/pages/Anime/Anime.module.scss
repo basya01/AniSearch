@@ -83,9 +83,15 @@
     }
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 790px) {
   .root {
     padding: 30px;
   }
 }
-
+@media screen and (max-width: 790px) {
+  .studio {
+    img {
+      max-width: 250px;
+    }
+  }
+}

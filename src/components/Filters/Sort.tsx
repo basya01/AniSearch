@@ -3,6 +3,7 @@ import styles from './Filters.module.scss';
 import arrow from '../../assets/arrow-icon.svg';
 import { setSort } from '../../redux/slices/filters';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import Arrow from './Arrow';
 
 const Sort: FC = () => {
   const sort = {
@@ -27,7 +28,7 @@ const Sort: FC = () => {
   return (
     <div className={styles.sort  + " " + styles.list}>
       <p onClick={() => setIsOpen(!isOpen)}>
-        {sort.name} <img className={isOpen ? styles.open : ''} src={arrow} alt="^" />
+        {sort.name} <Arrow className={isOpen ? styles.open : ''} />
       </p>
       {isOpen && <ul>{sortItemsJSX}</ul>}
     </div>

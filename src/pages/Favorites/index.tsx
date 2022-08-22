@@ -3,7 +3,6 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import AnimeItem from '../../components/AnimeItem';
 import CharacterItem from '../../components/CharacterItem';
 import { useAppSelector } from '../../hooks/redux';
-import { Favorites as IFavorites } from '../../redux/slices/favorites';
 import NotFound from '../NotFound';
 import styles from './Favorites.module.scss';
 

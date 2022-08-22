@@ -1,8 +1,8 @@
 @import './variables.scss';
 
 html {
-  color: #000;
-  background: $bg-bright;
+  color: var(--text-color);
+  background: var(--background-color);
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   box-sizing: border-box;

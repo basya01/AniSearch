@@ -8,6 +8,7 @@ import Favorites from './pages/Favorites';
 import NotFound from './pages/NotFound';
 import './styles/App.scss';
 import './styles/reset.scss';
+import './styles/theme.scss';
 
 const App: FC = () => {
   return (

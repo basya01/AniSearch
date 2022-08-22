@@ -3,12 +3,11 @@
 .types {
   display: flex;
   font-size: 19px;
-  color: #000;
   gap: 16px;
 
   p {
     cursor: pointer;
-    background: #fff;
+    background: var(--background-color-content);
     padding: 12px 16px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.11);
 

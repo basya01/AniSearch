@@ -7,6 +7,7 @@ import arrow from '../../assets/arrow-icon.svg';
 import xmark from '../../assets/xmark-genre.svg';
 import { FilterData } from '../../models/Filters';
 import { useAppDispatch } from '../../hooks/redux';
+import Arrow from './Arrow';
 
 interface FilterItemProps {
   filter: FilterData;
@@ -29,7 +30,7 @@ const FilterItem: FC<FilterItemProps> = ({ filter, setState, selected }) => {
     <div>
       <div className={styles.filter  + " " + styles.list}>
         <p onClick={() => setIsOpen(!isOpen)}>
-          {filter.name} <img className={isOpen ? styles.open : ''} src={arrow} alt="^" />
+          {filter.name} <Arrow className={isOpen ? styles.open : ''} />
         </p>
         {isOpen && <ul>{filterItemsJSX}</ul>}
       </div>

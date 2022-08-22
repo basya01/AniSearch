@@ -7,6 +7,7 @@ import { setGenres } from '../../redux/slices/filters';
 import xmark from '../../assets/xmark-genre.svg';
 import { Filter, FilterData } from '../../models/Filters';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import Arrow from './Arrow';
 
 const Genres: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +35,7 @@ const Genres: FC = () => {
   return (
     <div className={styles.genres + " " + styles.list}>
       <p onClick={() => setIsOpen(!isOpen)}>
-        {genresList.name} <img className={isOpen ? styles.open : '' } src={arrow} alt="^" />
+        {genresList.name} <Arrow className={isOpen ? styles.open : ''} />
       </p>
       {isOpen && <ul>{genresItems}</ul>}
     </div>

@@ -20,7 +20,7 @@
   &Logo {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     background: $main-color;
 
     img {
@@ -42,16 +42,24 @@
       width: 0;
     }
     height: calc(100vh - 108px);
-    margin-top: 25px;
+    padding-top: 25px;
+    background: var(--background-color);
   }
 }
 
 .logo {
   padding: 24px 0;
   font: 400 29px 'Montserrat Alternates', sans-serif;
-  color: #fff;
+  color: var(--background-color);
   span {
     font-weight: 600;
+  }
+}
+
+.xmark {
+  cursor: pointer;
+  path {
+    fill: var(--background-color);
   }
 }
 

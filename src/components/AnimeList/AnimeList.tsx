@@ -36,7 +36,7 @@ const AnimeList = () => {
     };
   }, [lastItem]);
 
-  const skeletons = [...new Array(8)].map((_, index) => <AnimeSkeleton key={index} />);
+  const skeletons = [...new Array(10)].map((_, index) => <AnimeSkeleton key={index} />);
 
   return (
     <div className={styles.root}>

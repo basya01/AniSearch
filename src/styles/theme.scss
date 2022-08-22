@@ -1,0 +1,15 @@
+:root[data-theme='light'] {
+  --background-color: #f9fafc;
+  --background-color-content: #fff;
+  --text-color: #000;
+  --anime-item-info: #fff;
+  --header-tools: #f8f8f8;
+}
+
+:root[data-theme='dark'] {
+  --background-color: #1E2326;
+  --background-color-content: #252a2e;
+  --text-color: #a0a3a8;
+  --anime-item-info: #252a2e;
+  --header-tools: #1E2326;
+}

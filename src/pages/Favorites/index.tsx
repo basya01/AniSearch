@@ -3,6 +3,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import AnimeItem from '../../components/AnimeItem';
 import CharacterItem from '../../components/CharacterItem';
 import { useAppSelector } from '../../hooks/redux';
+import { setDataLS } from '../../utils/localStorageHelper';
 import NotFound from '../NotFound';
 import styles from './Favorites.module.scss';
 
@@ -23,6 +24,14 @@ const Favorites = () => {
       setActiveType(null);
     }
   }, [pathname]);
+
+  useEffect(() => {
+    setDataLS('animes', animes);
+  }, [animes])
+
+  useEffect(() => {
+    setDataLS('characters', characters);
+  }, [characters])
 
   if (type !== 'animes' && type !== 'characters') {
     return (

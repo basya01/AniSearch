@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Anime } from '../../models/Anime';
 import { Character } from '../../models/Character';
+import { getDataLS } from '../../utils/localStorageHelper';
 
 
 export interface Favorites {
@@ -9,8 +10,8 @@ export interface Favorites {
 }
 
 const initialState: Favorites = {
-  animes: [],
-  characters: [],
+  animes: getDataLS('animes') || [],
+  characters: getDataLS('characters') || [],
 };
 
 export const favoritesSlice = createSlice({

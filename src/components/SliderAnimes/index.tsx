@@ -18,6 +18,7 @@ const SliderAnimes: FC<SliderAnimesProps> = ({ elems }) => {
     slidesToScroll: 5,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    className: styles.slider,
     responsive: [
       {
         breakpoint: 1225,

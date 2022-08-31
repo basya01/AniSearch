@@ -16,8 +16,8 @@ const Videos: FC<{ videos: Video[] }> = ({ videos }) => {
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    setHeight(getHeight())
-  }, [iFrame.current])
+    setHeight(getHeight());
+  }, [iFrame.current]);
 
   const updateHeight = () => {
     setHeight(getHeight());
@@ -31,10 +31,11 @@ const Videos: FC<{ videos: Video[] }> = ({ videos }) => {
     <div className={styles.root}>
       {videos.map((item) => (
         <iframe
+          allowFullScreen
           ref={iFrame}
           key={item.id}
           width="100%"
-          height={height + 'px'}
+          height={height + 'px'} 
           src={item.player_url.replace('http', 'https')}></iframe>
       ))}
     </div>

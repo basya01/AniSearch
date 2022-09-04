@@ -14,6 +14,9 @@ import { AnimeFull } from '../../models/AnimeFull';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useFetch } from '../../hooks/useFetch';
 import NotFound from '../NotFound';
+import { Role } from '../../models/Character';
+import { Screen } from '../../models/Filters';
+import { Anime as AnimeI } from '../../models/Anime';
 
 const Anime = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +26,22 @@ const Anime = () => {
   );
 
   const [anime, status] = useFetch<AnimeFull>(`https://shikimori.one/api/animes/${id}`, [id]);
+
+  const [characters] = useFetch<Role[]>(
+    `https://shikimori.one/api/animes/${id}/roles`,
+    [id],
+  );
+  const mainCharacters = characters?.filter(
+    (item: Role) => item.character && item.roles.includes('Main'),
+  );
+
+  const [screens] = useFetch<Screen[]>(
+    `https://shikimori.one/api/animes/${id}/screenshots`,
+    [id],
+  );
+
+  const [similar] = useFetch<AnimeI[]>(`https://shikimori.one/api/animes/${id}/similar`, []);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -105,22 +124,24 @@ const Anime = () => {
                   <p>{anime.description}</p>
                 </div>
               )}
-              <div className={styles.characters}>
-                <h2 className={styles.path}>Главные персонажи</h2>
-                <Characters id={Number(id)} />
-              </div>
-              <div className={styles.screenshots}>
+              {!!mainCharacters?.length && (
+                <div className={styles.characters}>
+                  <h2 className={styles.path}>Главные персонажи</h2>
+                  <Characters characters={mainCharacters} />
+                </div>
+              )}
+              {!!screens?.length && <div className={styles.screenshots}>
                 <h2 className={styles.path}>Скриншоты</h2>
-                <Screens id={Number(id)}></Screens>
-              </div>
-              <div className={styles.videos}>
+                <Screens screens={screens} />
+              </div>}
+              {!!anime.videos.length && <div className={styles.videos}>
                 <h2 className={styles.path}>Видеозаписи</h2>
                 <Videos videos={anime.videos} />
-              </div>
-              <div className={styles.similar}>
+              </div>}
+              {!!similar?.length && <div className={styles.similar}>
                 <h2 className={styles.path}>Похожие аниме</h2>
-                <Similar id={Number(id)} />
-              </div>
+                <Similar similar={similar} />
+              </div>}
             </div>
           )}
         </div>

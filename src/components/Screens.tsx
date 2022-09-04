@@ -8,7 +8,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { Screen } from '../models/Filters';
-import { useFetch } from '../hooks/useFetch';
 
 export const SampleNextArrow = ({ className, style, onClick }: any) => {
   return (
@@ -23,15 +22,10 @@ export const SamplePrevArrow = ({ className, style, onClick }: any) => {
 };
 
 interface ScreensProps {
-  id: number;
+  screens: Screen[] | null;
 }
 
-const Screens: FC<ScreensProps> = ({ id }) => {
-  const [screens, status] = useFetch<Screen[]>(
-    `https://shikimori.one/api/animes/${id}/screenshots`,
-    [id],
-  );
-
+const Screens: FC<ScreensProps> = ({ screens }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -67,19 +61,13 @@ const Screens: FC<ScreensProps> = ({ id }) => {
     ],
   };
 
-  if (status === 'error') {
-    return <></>;
-  }
-
   return (
     <div>
-      {status === 'success' && (
-        <Slider {...settings}>
-          {screens?.map((item) => (
-            <img key={item.preview} src={`https://shikimori.one/${item.preview}`} alt="screen" />
-          ))}
-        </Slider>
-      )}
+      <Slider {...settings}>
+        {screens?.map((item: any) => (
+          <img key={item.preview} src={`https://shikimori.one/${item.preview}`} alt="screen" />
+        ))}
+      </Slider>
     </div>
   );
 };

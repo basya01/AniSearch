@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FC } from 'react';
 import Slider from 'react-slick';
 import { Anime } from '../../models/Anime';
 import AnimeItem from '../AnimeItem';
@@ -6,7 +6,7 @@ import { SampleNextArrow, SamplePrevArrow } from '../Screens';
 import styles from './SliderAnimes.module.scss';
 
 interface SliderAnimesProps {
-  elems: Anime[];
+  elems: Anime[] | null;
 }
 
 const SliderAnimes: FC<SliderAnimesProps> = ({ elems }) => {

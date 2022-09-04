@@ -1,10 +1,6 @@
-import axios from 'axios';
-import React, { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import Slider from 'react-slick';
-import AnimeItem from '../../components/AnimeItem';
 import Button from '../../components/Button';
-import { SampleNextArrow, SamplePrevArrow } from '../../components/Screens';
 import SliderAnimes from '../../components/SliderAnimes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useFetch } from '../../hooks/useFetch';

@@ -1,11 +1,11 @@
 import { FC, useState } from 'react';
-import styles from './Filters.module.scss';
-import { setGenres } from '../../redux/slices/filters';
 import xmark from '../../assets/xmark-genre.svg';
-import { Filter, FilterData } from '../../models/Filters';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import Arrow from './Arrow';
 import { useFetch } from '../../hooks/useFetch';
+import { Filter } from '../../models/Filters';
+import { setGenres } from '../../redux/slices/filters';
+import Arrow from './Arrow';
+import styles from './Filters.module.scss';
 
 const Genres: FC = () => {
   const [isOpen, setIsOpen] = useState(false);

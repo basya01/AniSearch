@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react';
 import Genres from './Genres';
 import styles from './Filters.module.scss';
 import xmark from '../../assets/xmark.svg';
@@ -7,6 +7,7 @@ import FilterItem from './FilterItem';
 import { setDuration, setKind, setStatus } from '../../redux/slices/filters';
 import { useAppSelector } from '../../hooks/redux';
 import ThemeToggler from '../ThemeToggler.tsx';
+import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 interface FiltersProps {
   isOpen: boolean;
@@ -47,6 +48,7 @@ const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
     ],
   };
 
+  const widthScreen = useScreenWidth();
   const filters = useAppSelector((state) => state.filters);
 
   return (
@@ -62,12 +64,11 @@ const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
           height="22"
           viewBox="0 0 20 22"
           xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M19.2167 18.3596L12.5847 11.2518L19.2167 4.1439C19.9327 3.37651 19.9327 2.14107 19.2167 1.37368C18.5007 0.606295 17.348 0.606295 16.6319 1.37368L9.9999 8.48154L3.36787 1.37368C2.65186 0.606295 1.49912 0.606295 0.783106 1.37368C0.0670899 2.14107 0.0670899 3.37651 0.783106 4.1439L7.41514 11.2518L0.783106 18.3596C0.0670899 19.127 0.0670899 20.3624 0.783106 21.1298C1.49912 21.8972 2.65186 21.8972 3.36787 21.1298L9.9999 14.022L16.6319 21.1298C17.348 21.8972 18.5007 21.8972 19.2167 21.1298C19.9276 20.3624 19.9276 19.1216 19.2167 18.3596Z"
-          />
+          <path d="M19.2167 18.3596L12.5847 11.2518L19.2167 4.1439C19.9327 3.37651 19.9327 2.14107 19.2167 1.37368C18.5007 0.606295 17.348 0.606295 16.6319 1.37368L9.9999 8.48154L3.36787 1.37368C2.65186 0.606295 1.49912 0.606295 0.783106 1.37368C0.0670899 2.14107 0.0670899 3.37651 0.783106 4.1439L7.41514 11.2518L0.783106 18.3596C0.0670899 19.127 0.0670899 20.3624 0.783106 21.1298C1.49912 21.8972 2.65186 21.8972 3.36787 21.1298L9.9999 14.022L16.6319 21.1298C17.348 21.8972 18.5007 21.8972 19.2167 21.1298C19.9276 20.3624 19.9276 19.1216 19.2167 18.3596Z" />
         </svg>
       </div>
       <div className={`${styles.container} ${styles.containerFilters}`}>
+        {widthScreen && widthScreen <= 980 && <ThemeToggler />}
         <p className={styles.filterPath}>Фильтры</p>
         <Sort />
         <Genres />

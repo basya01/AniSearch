@@ -4,10 +4,10 @@
   position: fixed;
   height: 100vh;
   width: 280px;
-  background: #fff;
   left: -100%;
   z-index: 1000;
   transition: left 0.15s ease-in-out;
+  background: var(--background-color-content);
 }
 
 .open {
@@ -43,7 +43,6 @@
     }
     height: calc(100vh - 108px);
     padding-top: 25px;
-    background: var(--background-color);
   }
 }
 
@@ -130,5 +129,10 @@
 @media screen and (max-width: 1480px) {
   .logo {
     font-size: 25px;
+  }
+}
+@media screen and (max-width: 980px) {
+  .filterPath {
+    margin-top: 10px;
   }
 }

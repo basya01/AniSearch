@@ -58,7 +58,7 @@ const Character: FC = () => {
   return (
     <section>
       <div className="container container__page">
-        <div className={`container__content ${styles.root}`}>
+        <div className="container__content">
           {character && (
             <div className={styles.character}>
               <div className={styles.head}>

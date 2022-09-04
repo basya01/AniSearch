@@ -60,7 +60,7 @@ const Anime = () => {
   return (
     <section>
       <div className="container container__page">
-        <div className={`container__content ${styles.root}`}>
+        <div className="container__content">
           {anime && (
             <div className={styles.anime}>
               <div className={styles.head}>

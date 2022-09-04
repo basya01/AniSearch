@@ -1,11 +1,5 @@
 @import '../../styles/variables.scss';
 
-.root {
-  background-color: var(--background-color-content);
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.11);
-  padding: 45px;
-}
-
 .anime {
   display: flex;
   flex-direction: column;
@@ -58,7 +52,6 @@
   }
   margin-top: 27px;
 }
-
 .path {
   @include animeInfoPath;
   font-size: 17px;
@@ -66,28 +59,20 @@
 }
 
 @media screen and (max-width: 1225px) {
-  .root {
-    .mainInfo {
-      flex-wrap: wrap;
-    }
+  .mainInfo {
+    flex-wrap: wrap;
   }
 }
 
 @media screen and (max-width: 980px) {
-  .root {
-    .head {
-      flex-direction: column;
-    }
-    .info {
-      margin: 0;
-    }
+  .head {
+    flex-direction: column;
+  }
+  .info {
+    margin: 0;
   }
 }
-@media screen and (max-width: 790px) {
-  .root {
-    padding: 30px;
-  }
-}
+
 @media screen and (max-width: 790px) {
   .studio {
     img {

@@ -1,11 +1,5 @@
 @import '../../styles/variables.scss';
 
-.root {
-  background-color: var(--background-color-content);
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.11);
-  padding: 50px;
-}
-
 .character {
   display: flex;
   flex-direction: column;

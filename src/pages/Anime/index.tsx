@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AnimeInfo from '../../components/AnimeInfo';
 import Button from '../../components/Button';
@@ -13,20 +12,19 @@ import Similar from '../../components/Similar';
 import { addAnime, removeAnime } from '../../redux/slices/favorites';
 import { AnimeFull } from '../../models/AnimeFull';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useFetch } from '../../hooks/useFetch';
+import NotFound from '../NotFound';
 
 const Anime = () => {
   const dispatch = useAppDispatch();
-  const [anime, setAnime] = useState<AnimeFull>();
   const { id } = useParams();
   const isFavAnime = useAppSelector(
     (state) => !!state.favorites.animes.filter((item) => item.id === Number(id)).length,
   );
 
-  useEffect(() => {
-    axios.get(`https://shikimori.one/api/animes/${id}`).then(({ data }) => {
-      setAnime(data);
-    });
+  const [anime, status] = useFetch<AnimeFull>(`https://shikimori.one/api/animes/${id}`, [id]);
 
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
@@ -57,11 +55,15 @@ const Anime = () => {
     }
   };
 
+  if (status === 'error') {
+    return <NotFound />;
+  }
+
   return (
     <section>
       <div className="container container__page">
         <div className="container__content">
-          {anime && (
+          {status === 'success' && anime && (
             <div className={styles.anime}>
               <div className={styles.head}>
                 <div className={styles.animeImg}>

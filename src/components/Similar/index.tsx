@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React, { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
+import { useFetch } from '../../hooks/useFetch';
 import { Anime } from '../../models/Anime';
 import SliderAnimes from '../SliderAnimes';
 
@@ -8,15 +8,10 @@ interface SimilarProps {
 }
 
 const Similar: FC<SimilarProps> = ({ id }) => {
-  const [similar, setSimilar] = useState<Anime[]>();
+  const [similar, status] = useFetch<Anime[]>(`https://shikimori.one/api/animes/${id}/similar`, []);
 
-  useEffect(() => {
-    axios.get(`https://shikimori.one/api/animes/${id}/similar`).then(({ data }) => {
-      setSimilar(data);
-    });
-  }, [id]);
-
-  if (!similar) return <></>;
+  if (!similar || status === 'error') return <></>;
+  
   return (
     <>
       <SliderAnimes elems={similar} />

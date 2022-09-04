@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import Slider from 'react-slick';
 
 import arrowPrev from '../assets/arrow-prev.svg';
@@ -9,6 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { Screen } from '../models/Filters';
+import { useFetch } from '../hooks/useFetch';
 
 export const SampleNextArrow = ({ className, style, onClick }: any) => {
   return (
@@ -27,16 +27,10 @@ interface ScreensProps {
 }
 
 const Screens: FC<ScreensProps> = ({ id }) => {
-  const [screens, setScreens] = useState<Screen[]>();
-
-  useEffect(() => {
-    const fetchScreens = async () => {
-      const { data } = await axios.get(`https://shikimori.one/api/animes/${id}/screenshots`);
-      setScreens(data);
-    };
-
-    fetchScreens();
-  }, [id]);
+  const [screens, status] = useFetch<Screen[]>(
+    `https://shikimori.one/api/animes/${id}/screenshots`,
+    [id],
+  );
 
   const settings = {
     dots: true,
@@ -52,7 +46,7 @@ const Screens: FC<ScreensProps> = ({ id }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-        }
+        },
       },
       {
         breakpoint: 790,
@@ -60,7 +54,7 @@ const Screens: FC<ScreensProps> = ({ id }) => {
           slidesToShow: 2,
           slidesToScroll: 2,
           dots: false,
-        }
+        },
       },
       {
         breakpoint: 500,
@@ -68,16 +62,20 @@ const Screens: FC<ScreensProps> = ({ id }) => {
           slidesToShow: 1,
           slidesToScroll: 1,
           dots: false,
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
+
+  if (status === 'error') {
+    return <></>;
+  }
 
   return (
     <div>
-      {screens && (
+      {status === 'success' && (
         <Slider {...settings}>
-          {screens.map((item) => (
+          {screens?.map((item) => (
             <img key={item.preview} src={`https://shikimori.one/${item.preview}`} alt="screen" />
           ))}
         </Slider>

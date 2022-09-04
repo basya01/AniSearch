@@ -7,31 +7,20 @@ import Button from '../../components/Button';
 import { SampleNextArrow, SamplePrevArrow } from '../../components/Screens';
 import SliderAnimes from '../../components/SliderAnimes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useFetch } from '../../hooks/useFetch';
 import { CharacterFull } from '../../models/CharacterFull';
 import { addCharacter, removeCharacter } from '../../redux/slices/favorites';
 import { arrayToList } from '../../utils/arrayToList';
+import NotFound from '../NotFound';
 import styles from './Character.module.scss';
 
 const Character: FC = () => {
-  const [character, setCharacter] = useState<CharacterFull>();
   const { id } = useParams();
+  const [character, status] = useFetch<CharacterFull>(
+    `https://shikimori.one/api/characters/${id}`,
+    [id],
+  );
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    axios.get(`https://shikimori.one/api/characters/${id}`).then(({ data }) => {
-      setCharacter(data);
-    });
-  }, [id]);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  };
 
   const isFavCharacter = useAppSelector(
     (state) => !!state.favorites.characters.filter((item) => item.id === Number(id)).length,
@@ -55,11 +44,15 @@ const Character: FC = () => {
     }
   };
 
+  if (status === 'error') {
+    return <NotFound />;
+  }
+
   return (
     <section>
       <div className="container container__page">
         <div className="container__content">
-          {character && (
+          {character && status === 'success' && (
             <div className={styles.character}>
               <div className={styles.head}>
                 <div className={styles.characterImg}>

@@ -1,0 +1,23 @@
+.noSlider {
+  margin-top: 0 15px;
+  display: flex;
+  gap: 30px;
+  div {
+    max-width: 200px;
+  }
+}
+
+.elem {
+  margin: 15px 10px;
+  display: block;
+}
+
+@media screen and (max-width: 790px) {
+  .noSlider {
+    margin-top: 0 7px;
+  }
+  
+  .elem {
+    margin: 0 7px;
+  }
+}

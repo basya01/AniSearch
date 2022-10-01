@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+
+.root {
+  display: flex;
+  position: relative;
+  background: var(--header-tools);
+  gap: 16px;
+  max-width: min-content;
+  padding: 8px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: all 0.1s;
+  circle {
+    fill: $main-color;
+  }
+}
+
+.icon {
+  path {
+    fill: var(--text-color);
+  }
+}
+
+.dark {
+  left: 40px;
+}
+
+.light {
+  left: 5px;
+}

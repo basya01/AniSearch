@@ -1,0 +1,12 @@
+.similar {
+  margin: 15px;
+  display: block;
+}
+.noSlider {
+  margin-top: 15px;
+  display: flex;
+  gap: 30px;
+  div {
+    max-width: 200px;
+  }
+}

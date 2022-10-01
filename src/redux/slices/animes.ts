@@ -1,26 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { Anime } from '../../models/Anime';
 
-export interface Anime {
-  aired_on: string;
-  episodes: number;
-  episodes_aired: number;
-  id: number;
-  image: { original: string };
-  kind: string;
-  name: string;
-  released_on: string | null;
-  russian: string;
-  score: string;
-  status: string;
-  url: string;
-}
-
-enum Status {
+export enum Status {
   PENDING = 'pending',
   SUCCESS = 'success',
   ERROR = 'error',
+  MISSING = 'missing',
 }
 
 export interface Animes {
@@ -35,34 +21,44 @@ const initialState: Animes = {
 
 export const fetchAnimes = createAsyncThunk<Anime[], Record<string, string>>(
   'animes/fetchAnimes',
-  async ({ genre, sort, status, duration, kind, search }) => {
+  async ({ genre, sort, status, duration, kind, search, page }) => {
     const { data } = await axios.get<Anime[]>(
-      `https://shikimori.one/api/animes?limit=20&${genre}&${sort}&${status}&${duration}&${kind}&${search}`,
+      `https://shikimori.one/api/animes?limit=20&${genre}&${sort}&${status}&${duration}&${kind}&${search}&${page}`,
     );
-
+    if (!data.length) {
+      throw new Error('Anime missing');
+    }
     return data;
   },
 );
 
 export const animesSlice = createSlice({
-  name: 'counter',
+  name: 'animes',
   initialState,
-  reducers: {},
+  reducers: {
+    clearAnimes: (state) => {
+      state.items.splice(0, state.items.length);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAnimes.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items.push(...action.payload);
         state.status = Status.SUCCESS;
       })
       .addCase(fetchAnimes.pending, (state) => {
         state.status = Status.PENDING;
       })
-      .addCase(fetchAnimes.rejected, (state) => {
+      .addCase(fetchAnimes.rejected, (state, action) => {
+        if (action.error.message === 'Anime missing') {
+          state.status = Status.MISSING;
+          return;
+        }
         state.status = Status.ERROR;
       });
   },
 });
 
-export const {} = animesSlice.actions;
+export const { clearAnimes } = animesSlice.actions;
 
 export default animesSlice.reducer;

@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  p {
+    margin: auto 0 auto 5px;
+    color: $blue;
+    font-weight: 500;
+    font-size: 20px;
+  }
+}

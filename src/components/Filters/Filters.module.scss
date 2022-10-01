@@ -3,11 +3,11 @@
 .filters {
   position: fixed;
   height: 100vh;
-  width: 335px;
-  background: #fff;
-  left: -335px;
+  width: 280px;
+  left: -100%;
   z-index: 1000;
   transition: left 0.15s ease-in-out;
+  background: var(--background-color-content);
 }
 
 .open {
@@ -20,7 +20,7 @@
   &Logo {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     background: $main-color;
 
     img {
@@ -42,16 +42,23 @@
       width: 0;
     }
     height: calc(100vh - 108px);
-    margin-top: 25px;
+    padding-top: 25px;
   }
 }
 
 .logo {
   padding: 24px 0;
   font: 400 29px 'Montserrat Alternates', sans-serif;
-  color: #fff;
+  color: var(--background-color);
   span {
     font-weight: 600;
+  }
+}
+
+.xmark {
+  cursor: pointer;
+  path {
+    fill: var(--background-color);
   }
 }
 
@@ -60,7 +67,7 @@
   color: $main-color;
 }
 
-@mixin list {
+.list {
   margin-top: 8px;
   p {
     cursor: pointer;
@@ -86,7 +93,6 @@
   }
 }
 .sort {
-  @include list;
   li {
     .active {
       display: inline;
@@ -97,7 +103,6 @@
 }
 
 .genres {
-  @include list;
   li {
     display: flex;
     align-items: center;
@@ -110,7 +115,6 @@
 }
 
 .filter {
-  @include list;
   li {
     display: flex;
     align-items: center;
@@ -119,5 +123,21 @@
       margin-right: 5px;
       color: $main-color;
     }
+  }
+}
+
+.notFound {
+  font-size: 14px !important;
+  margin-left: 15px;
+}
+
+@media screen and (max-width: 1480px) {
+  .logo {
+    font-size: 25px;
+  }
+}
+@media screen and (max-width: 980px) {
+  .filterPath {
+    margin-top: 10px;
   }
 }

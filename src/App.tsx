@@ -1,16 +1,24 @@
-import { FC } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
-import AnimeList from './pages/AnimeList/AnimeList';
+import Anime from './pages/Anime';
+import AnimeList from './pages/AnimeSearch';
+import Character from './pages/Character';
+import Favorites from './pages/Favorites';
+import NotFound from './pages/NotFound';
 import './styles/App.scss';
 import './styles/reset.scss';
+import './styles/theme.scss';
 
 const App: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Header />}>
         <Route path="" element={<AnimeList />} />
-        <Route path="favorite" element={<div>Favorite</div>} />
+        <Route path="favorites/:type" element={<Favorites />} />
+        <Route path="anime/:id" element={<Anime />} />
+        <Route path="character/:id" element={<Character />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

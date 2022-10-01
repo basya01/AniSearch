@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import qs, { ParsedQs } from 'qs';
 
 export interface FilterState {
   genres: number[];
@@ -8,19 +9,33 @@ export interface FilterState {
   duration: string;
   kind: string;
   search: string;
+  page: number;
 }
 
+interface ParamsUrl {
+  genres?: string;
+  sort?: string;
+  status?: string;
+  duration?: string;
+  kind?: string;
+  search?: string;
+}
+
+const { genres, sort, status, duration, kind, search }: ParamsUrl = qs.parse(
+  window.location.search.substring(1),
+);
 const initialState: FilterState = {
-  genres: [],
-  sort: 'ranked',
-  status: '',
-  duration: '',
-  kind: '',
-  search: '',
+  genres: genres?.split(',').map((filter: string) => +filter) || [],
+  sort: sort || 'ranked',
+  status: status || '',
+  duration: duration || '',
+  kind: kind || '',
+  search: search || '',
+  page: 1,
 };
 
 export const filtersSlice = createSlice({
-  name: 'counter',
+  name: 'filters',
   initialState,
   reducers: {
     setGenres: (state, action: PayloadAction<number>) => {
@@ -42,10 +57,13 @@ export const filtersSlice = createSlice({
     setSearch: (state, action: PayloadAction<string>) => {
       state.search = state.search === action.payload ? '' : action.payload;
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { setGenres, setSort, setStatus, setDuration, setKind, setSearch } =
+export const { setGenres, setSort, setStatus, setDuration, setKind, setSearch, setPage } =
   filtersSlice.actions;
 
 export default filtersSlice.reducer;

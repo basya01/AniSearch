@@ -1,0 +1,63 @@
+@import '../../styles/variables.scss';
+
+.types {
+  display: flex;
+  font-size: 19px;
+  gap: 16px;
+
+  p {
+    cursor: pointer;
+    background: var(--background-color-content);
+    padding: 12px 16px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.11);
+
+    &:hover {
+      color: $main-color;
+    }
+  }
+}
+
+.list {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 43px;
+  row-gap: 43px;
+  text-align: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.active {
+  color: $main-color;
+  border-bottom: 3px solid $main-color;
+}
+
+@media screen and (max-width: 1225px) {
+  .list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .list {
+    column-gap: 30px;
+    row-gap: 30px;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .list {
+    column-gap: 20px;
+    row-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.infoList {
+  max-width: 500px;
+  p {
+    @include animeInfoPath;
+  }
+  ul {
+    margin-top: 17px;
+    li {
+      span {
+        font-weight: 500;
+      }
+      margin-top: 15px;
+    }
+  }
+}

@@ -1,0 +1,82 @@
+@import '../../styles/variables.scss';
+
+.anime {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.head {
+  display: flex;
+}
+
+.info {
+  width: 100%;
+  margin-left: 43px;
+}
+
+.mainInfo {
+  margin-top: 17px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.animeImg {
+  img {
+    margin-bottom: -4px;
+  }
+  max-width: 225px;
+  margin: 0px auto 24px auto;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.rating,
+.studio,
+.stats {
+  @include animeInfoPath;
+  margin-bottom: 12px;
+}
+
+.studio {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  img {
+    max-width: 300px;
+    max-height: 150px;
+  }
+  margin-top: 27px;
+}
+.path {
+  @include animeInfoPath;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+@media screen and (max-width: 1225px) {
+  .mainInfo {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .head {
+    flex-direction: column;
+  }
+  .info {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .studio {
+    img {
+      max-width: 250px;
+    }
+  }
+}

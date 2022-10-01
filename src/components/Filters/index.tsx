@@ -1,28 +1,17 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react';
 import Genres from './Genres';
 import styles from './Filters.module.scss';
 import xmark from '../../assets/xmark.svg';
 import Sort from './Sort';
 import FilterItem from './FilterItem';
 import { setDuration, setKind, setStatus } from '../../redux/slices/filters';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useAppSelector } from '../../hooks/redux';
+import ThemeToggler from '../ThemeToggler.tsx';
+import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 interface FiltersProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-export interface Filter {
-  id: number;
-  kind?: string;
-  name: string;
-  russian: string;
-}
-
-export interface FilterData {
-  name: string;
-  items: Filter[];
 }
 
 const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
@@ -59,9 +48,8 @@ const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
     ],
   };
 
-  const selectedStatus = useSelector<RootState, string>((state) => state.filters.status);
-  const selectedDuration = useSelector<RootState, string>((state) => state.filters.duration);
-  const selectedKind = useSelector<RootState, string>((state) => state.filters.kind);
+  const widthScreen = useScreenWidth();
+  const filters = useAppSelector((state) => state.filters);
 
   return (
     <div className={`${styles.filters} ${isOpen ? styles.open : ''}`}>
@@ -69,15 +57,24 @@ const Filters: FC<FiltersProps> = ({ isOpen, setIsOpen }) => {
         <h1 className={styles.logo}>
           <span>Ani</span>Search
         </h1>
-        <img onClick={() => setIsOpen(false)} src={xmark} alt="x" />
+        <svg
+          onClick={() => setIsOpen(false)}
+          className={styles.xmark}
+          width="20"
+          height="22"
+          viewBox="0 0 20 22"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.2167 18.3596L12.5847 11.2518L19.2167 4.1439C19.9327 3.37651 19.9327 2.14107 19.2167 1.37368C18.5007 0.606295 17.348 0.606295 16.6319 1.37368L9.9999 8.48154L3.36787 1.37368C2.65186 0.606295 1.49912 0.606295 0.783106 1.37368C0.0670899 2.14107 0.0670899 3.37651 0.783106 4.1439L7.41514 11.2518L0.783106 18.3596C0.0670899 19.127 0.0670899 20.3624 0.783106 21.1298C1.49912 21.8972 2.65186 21.8972 3.36787 21.1298L9.9999 14.022L16.6319 21.1298C17.348 21.8972 18.5007 21.8972 19.2167 21.1298C19.9276 20.3624 19.9276 19.1216 19.2167 18.3596Z" />
+        </svg>
       </div>
       <div className={`${styles.container} ${styles.containerFilters}`}>
+        {widthScreen && widthScreen <= 980 && <ThemeToggler />}
         <p className={styles.filterPath}>Фильтры</p>
         <Sort />
         <Genres />
-        <FilterItem filter={status} setState={setStatus} selected={selectedStatus} />
-        <FilterItem filter={duration} setState={setDuration} selected={selectedDuration} />
-        <FilterItem filter={kind} setState={setKind} selected={selectedKind} />
+        <FilterItem filter={status} setState={setStatus} selected={filters.status} />
+        <FilterItem filter={duration} setState={setDuration} selected={filters.duration} />
+        <FilterItem filter={kind} setState={setKind} selected={filters.kind} />
       </div>
     </div>
   );

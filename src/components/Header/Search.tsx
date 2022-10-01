@@ -2,15 +2,14 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import SearchSVG from '../../assets/search-icon.svg';
 import styles from './Header.module.scss';
 import { setSearch } from '../../redux/slices/filters';
-import { useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
 import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const Search = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const [searchLocal, setSearchLocal] = useState('');
-  const searchGlobal = useSelector<RootState, string>((state) => state.filters.search);
+  const dispatch = useAppDispatch();
+  const searchGlobal = useAppSelector((state) => state.filters.search);
+  const [searchLocal, setSearchLocal] = useState(searchGlobal || '');
 
   const setSearchDebounce = useCallback(
     debounce((value) => dispatch(setSearch(value)), 500),
@@ -21,8 +20,6 @@ const Search = () => {
     setSearchLocal(event.target.value);
     setSearchDebounce(event.target.value);
   };
-
-  console.log(searchGlobal);
 
   return (
     <div className={styles.search}>

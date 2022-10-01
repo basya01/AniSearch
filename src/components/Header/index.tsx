@@ -1,29 +1,31 @@
-import React, { FC } from 'react';
-import { useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-
+import ThemeToggler from '../ThemeToggler.tsx';
 import styles from './Header.module.scss';
 import Search from './Search';
 
 const Header: FC = () => {
+  const [activePage, setActivePage] = useState<number | null>();
   const { pathname } = useLocation();
-  const [activePage, setActivePage] = useState(pathname === '/' ? 0 : 1);
+
+  useEffect(() => {
+    if (pathname === '/') {
+      setActivePage(0);
+    } else if (pathname.includes('/favorites/')) {
+      setActivePage(1);
+    } else {
+      setActivePage(null);
+    }
+  }, [pathname]);
 
   const NavItemsData = [
     { id: 0, value: 'Список аниме', link: '/' },
-    { id: 1, value: 'Избранное', link: 'favorite' },
+    { id: 1, value: 'Избранное', link: 'favorites/animes' },
   ];
-
-  const pageHandler = (id: number) => {
-    setActivePage(id);
-  };
 
   const NavItems = NavItemsData.map((item) => (
     <div className={styles.navItem} key={item.id}>
-      <Link
-        to={item.link}
-        onClick={() => pageHandler(item.id)}
-        className={activePage === item.id ? styles.active : ''}>
+      <Link to={item.link} className={activePage === item.id ? styles.active : ''}>
         {item.value}
       </Link>
     </div>
@@ -37,6 +39,7 @@ const Header: FC = () => {
             <span>Ani</span>Search
           </h1>
           <nav className={styles.nav}>{NavItems}</nav>
+          <ThemeToggler className={styles.toggler} />
           <Search />
         </div>
       </header>

@@ -23,7 +23,7 @@ export const fetchAnimes = createAsyncThunk<Anime[], Record<string, string>>(
   'animes/fetchAnimes',
   async ({ genre, sort, status, duration, kind, search, page }) => {
     const { data } = await axios.get<Anime[]>(
-      `https://shikimori.one/api/animes?limit=20&${genre}&${sort}&${status}&${duration}&${kind}&${search}&${page}`,
+      `https://shikimori.me/api/animes?limit=20&${genre}&${sort}&${status}&${duration}&${kind}&${search}&${page}`,
     );
     if (!data.length) {
       throw new Error('Anime missing');

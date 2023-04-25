@@ -13,7 +13,7 @@ import styles from './Character.module.scss';
 const Character: FC = () => {
   const { id } = useParams();
   const [character, status] = useFetch<CharacterFull>(
-    `https://shikimori.one/api/characters/${id}`,
+    `${process.env.REACT_APP_API_URL}/api/characters/${id}`,
     [id],
   );
   const dispatch = useAppDispatch();
@@ -52,7 +52,7 @@ const Character: FC = () => {
             <div className={styles.character}>
               <div className={styles.head}>
                 <div className={styles.characterImg}>
-                  <img src={`https://shikimori.one${character.image.original}`} alt="anime_image" />
+                  <img src={`${process.env.REACT_APP_API_URL}${character.image.original}`} alt="anime_image" />
                   <Button active={isFavCharacter} onClick={buttonFavHandler}>
                     {isFavCharacter ? 'Убрать из избранного' : 'Добавить в избранное'}
                   </Button>

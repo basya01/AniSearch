@@ -25,10 +25,10 @@ const Anime = () => {
     (state) => !!state.favorites.animes.filter((item) => item.id === Number(id)).length,
   );
 
-  const [anime, status] = useFetch<AnimeFull>(`https://shikimori.one/api/animes/${id}`, [id]);
+  const [anime, status] = useFetch<AnimeFull>(`${process.env.REACT_APP_API_URL}/api/animes/${id}`, [id]);
 
   const [characters] = useFetch<Role[]>(
-    `https://shikimori.one/api/animes/${id}/roles`,
+    `${process.env.REACT_APP_API_URL}/api/animes/${id}/roles`,
     [id],
   );
   const mainCharacters = characters?.filter(
@@ -36,11 +36,11 @@ const Anime = () => {
   );
 
   const [screens] = useFetch<Screen[]>(
-    `https://shikimori.one/api/animes/${id}/screenshots`,
+    `${process.env.REACT_APP_API_URL}/api/animes/${id}/screenshots`,
     [id],
   );
 
-  const [similar] = useFetch<AnimeI[]>(`https://shikimori.one/api/animes/${id}/similar`, []);
+  const [similar] = useFetch<AnimeI[]>(`${process.env.REACT_APP_API_URL}/api/animes/${id}/similar`, []);
 
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const Anime = () => {
             <div className={styles.anime}>
               <div className={styles.head}>
                 <div className={styles.animeImg}>
-                  <img src={`https://shikimori.one${anime.image.original}`} alt="anime_image" />
+                  <img src={`${process.env.REACT_APP_API_URL}${anime.image.original}`} alt="anime_image" />
                   <Button active={isFavAnime} onClick={buttonHandler}>
                     {isFavAnime ? 'Убрать из избранного' : 'Добавить в избранное'}
                   </Button>
@@ -105,7 +105,7 @@ const Anime = () => {
                       <div className={styles.studio}>
                         <p>Студии:</p>
                         {anime.studios.map((item) => (
-                          <img src={`https://shikimori.one/${item.image}`} alt="" key={item.id} />
+                          <img src={`${process.env.REACT_APP_API_URL}${item.image}`} alt="" key={item.id} />
                         ))}
                       </div>
                     </div>

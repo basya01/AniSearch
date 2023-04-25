@@ -8,8 +8,8 @@ import Arrow from './Arrow';
 import styles from './Filters.module.scss';
 
 const Genres: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [genresList, status] = useFetch<Filter[]>('https://shikimori.one/api/genres', []);
+  const [isOpen, setIsOpen] = useState(false)
+  const [genresList, status] = useFetch<Filter[]>(`${process.env.REACT_APP_API_URL}/api/genres`, []);
   const genres = useAppSelector((state) => state.filters.genres);
   const dispatch = useAppDispatch();
 

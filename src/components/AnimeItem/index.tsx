@@ -33,7 +33,7 @@ const AnimeItem = React.forwardRef<HTMLDivElement, AnimeItemProps>(({ anime, cla
   return (
     <Link to={`/anime/${id}`} className={styles.root + `${className ? ' ' + className : ''}`}>
       <div className={styles.item} ref={ref}>
-        <img src={`https://shikimori.one${image.original}`} alt="" />
+        <img src={`${process.env.REACT_APP_API_URL}${image.original}`} alt="" />
         <FavoriteIcon
           active={!!isFavAnimes}
           className={styles.favorite}

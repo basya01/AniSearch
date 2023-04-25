@@ -65,7 +65,7 @@ const Screens: FC<ScreensProps> = ({ screens }) => {
     <div>
       <Slider {...settings}>
         {screens?.map((item: any) => (
-          <img key={item.preview} src={`https://shikimori.one/${item.preview}`} alt="screen" />
+          <img key={item.preview} src={`${process.env.REACT_APP_API_URL}${item.preview}`} alt="screen" />
         ))}
       </Slider>
     </div>

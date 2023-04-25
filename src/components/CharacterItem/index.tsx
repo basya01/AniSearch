@@ -33,7 +33,7 @@ const CharacterItem: FC<CharacterItemProps> = ({ character, className }) => {
   return (
     <Link to={`/character/${character.id}`} className={styles.root}>
       <div className={styles.item + `${className ? ' ' + className : ''}`}>
-        <img src={`https://shikimori.one${character.image.original}`} alt="" />
+        <img src={`${process.env.REACT_APP_API_URL}${character.image.original}`} alt="" />
         <FavoriteIcon
           active={!!isFavCharacter}
           className={styles.favorite}
